@@ -7,8 +7,7 @@
 }
 
 body {
-	background-color: black;
-	min-height: 200vh;
+	background-color: white;
 }
 header {
 	position: fixed;
