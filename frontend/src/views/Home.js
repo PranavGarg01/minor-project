@@ -1,29 +1,34 @@
-import React from 'react'
-import './hopepage.css'
+import { Grid } from "@material-ui/core";
+import React from "react";
+import "./hopepage.css";
+
 const Home = () => {
 	return (
+		<body>
+			<section class="banner">
+				<Grid container>
+					<Grid item xs={12} md={4}>
+						<div></div>
+					</Grid>
+					<Grid item xs={12} md={8}>
+						<div>
+							<img
+								style={{
+									marginRight: "0",
+									marginLeft: "auto",
+									display: "block",
+									maxWidth: "50rem",
+									maxHeight: "50rem",
+								}}
+								src="img/img-4.png"
+								alt="main-image"
+							/>
+						</div>
+					</Grid>
+				</Grid>
+			</section>
+		</body>
+	);
+};
 
-
-<body>
-
-  <header>
-    <a href="#" class="logo">logo</a>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Reviews</a></li>
-      <li><a href="#">Contact us</a></li>
-    </ul>
-  </header>
-
-  <section class="banner">
-
-  </section>
-
-  
-</body>
-	)
-}
-
-export default Home
+export default Home;
