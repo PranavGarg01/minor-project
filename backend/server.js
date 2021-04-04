@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 const morgan = require("morgan");
 const helmet = require("helmet");
 //for security
@@ -29,8 +29,8 @@ app.use(xss());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 mins
-  max: 100,
+	windowMs: 10 * 60 * 1000, // 10 mins
+	max: 100,
 });
 app.use(limiter);
 
@@ -41,17 +41,27 @@ app.use(hpp());
 app.use(cors());
 
 //routes
-app.use("/api/auth",require("./routes/auth"));
+app.use("/api/auth", require("./routes/auth"));
 app.use("/api/profile", require("./routes/profile"));
 // app.use('/api/auth',require('./routes/auth'))
 // app.use('/api/property',require('./routes/property'))
 
-app.get('/api/',(req,res)=>{
-	res.send('hello world');
-})
+app.get("/api/", (req, res) => {
+	res.send("hello world");
+});
+
+//errorHandler
+app.use(require("./middleware/error"));
 //Server listening on PORT
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () =>
-  console.log(`Server Started on Port ${PORT}`.yellow.bold)
+	console.log(`Server Started on Port ${PORT}`.yellow.bold)
 );
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err, promise) => {
+	console.log(`Error: ${err.message}`.red);
+	// Close server & exit process
+	//server.close(() => process.exit(1));
+});

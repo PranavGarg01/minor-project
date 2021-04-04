@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 //routing
 import { Switch, Link, BrowserRouter, Route } from "react-router-dom";
 import PrivateRoute from './components/routing/PrivateRoute';
-
+import NotFound from './components/routing/NotFound';
+import Alert from './components/layouts/Alert';
 import Navbar from "./components/Navbar/Navbar.js";
 import Home from "./views/Home";
 import Login from "./views/Login";
@@ -28,7 +29,9 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
+				<Alert />
 				<Navbar />
+				<Alert />
 				<Switch>
 					<Route exact path='/'>
 						<Home />
@@ -40,8 +43,11 @@ const App = () => {
 						<Register />
 					</Route>
 					<PrivateRoute exact path='/dashboard'>
-						<Dashboard/>
+						<Dashboard />
 					</PrivateRoute>
+					<Route exact path='*'>
+						<NotFound />
+					</Route>
 				</Switch>
 			</BrowserRouter>
 		</Provider>

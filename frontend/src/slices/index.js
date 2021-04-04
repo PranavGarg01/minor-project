@@ -1,8 +1,10 @@
 import auth from './auth'
 import loading from './loading'
+import alert from "./alert";
 const rootReducer = {
 	loading,
-	auth
+	auth,
+	alert
 };
 
 export default rootReducer;

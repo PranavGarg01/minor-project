@@ -1,48 +1,56 @@
-import React, { Component } from "react";
-import { MenuItems } from "./MenuItems";
+import React, { Component, useState } from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { MenuItems, PrivateLinks } from "./MenuItems";
 import { Button } from "../Button";
 import "./Navbar.css";
 import ReorderIcon from "@material-ui/icons/Reorder";
+import { logout } from "../../slices/auth";
 
-class Navbar extends Component {
-	state = { clicked: false };
-
-	handleClick = () => {
-		this.setState({ clicked: !this.state.clicked });
+const Navbar = () => {
+	const dispatch = useDispatch();
+	const [toggle, setToggle] = useState(false);
+	const { auth } = useSelector((state) => ({
+		auth: state.auth,
+	}));
+	const handleClick = () => {
+		console.log(toggle);
+		setToggle(!toggle);
 	};
 
-	render() {
-		return (
-			<nav className="NavbarItems">
-				<h1 className="navbar-logo">
-					React<i className="fab fa-react"></i>
-				</h1>
-				<div className="menu-icon" onClick={this.handleClick}>
-					<i
-						className={
-							this.state.clicked ? "fas fa-times" : "fas fa-bars"
-						}
-					></i>
-				</div>
-				<ul
-					className={
-						this.state.clicked ? "nav-menu active" : "nav-menu"
-					}
-				>
-					{MenuItems.map((item, index) => {
-						return (
-							<li key={index}>
-								<a className={item.cName} href={item.url}>
-									{item.title}
-								</a>
-							</li>
-						);
-					})}
-				</ul>
-				<Button>Sign Up</Button>
-			</nav>
-		);
-	}
-}
+	return (
+		<nav className='NavbarItems'>
+			<h1 className='navbar-logo'>
+				React<i className='fab fa-react'></i>
+			</h1>
+			<div className='menu-icon' onClick={handleClick}>
+				<i className={toggle ? "fas fa-times" : "fas fa-bars"}></i>
+			</div>
+			<ul className={toggle ? "nav-menu active" : "nav-menu"}>
+				{!auth.isAuthenticated
+					? (MenuItems.map((item, index) => {
+							return (
+								<li key={index}>
+									<a className={item.cName} href={item.url}>
+										{item.title}
+									</a>
+								</li>
+							);
+					  }))
+					: 
+					(
+						PrivateLinks.map((item, index) =>
+								<li key={index}>
+									<a className={item.cName} href={item.url}>
+										{item.title}
+									</a>
+								</li>
+						)
+					)}</ul>
+					   {auth.isAuthenticated && <Button onClick={()=>dispatch(logout())}>Logout</Button>	}	
+
+			{/* <Button>Sign Up</Button> */}
+		</nav>
+	);
+};
 
 export default Navbar;

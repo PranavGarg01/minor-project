@@ -7,7 +7,9 @@ import { useHistory } from "react-router-dom";
 const Register = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const {isAuthenticated} = useSelector(state => ({isAuthenticated : state.auth.isAuthenticated}));
+	const { isAuthenticated } = useSelector((state) => ({
+		isAuthenticated: state.auth.isAuthenticated,
+	}));
 	const [formData, setFormData] = useState({
 		name : "",
 		email: "",

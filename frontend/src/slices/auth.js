@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import isEmpty from "../utils/is-empty";
 import setAuthToken from "../utils/setAuthToken";
 import * as REQUESTS from "../api/auth";
-// import { setAlert } from "./alert";
+import { setAlert } from "./alert";
 import { setLoading, clearLoading } from "./loading";
 import { LOGIN } from "../constants/routes";
 
@@ -77,11 +77,11 @@ export const registerUser = (formData, history) => async (dispatch) => {
       // dispatch(loadUser());
       // dispatch(setToken(token));
       history.push(LOGIN);
-      // dispatch(setAlert("Registered Successfully!", "success"));
+      dispatch(setAlert("Registered Successfully!", "success"));
     }
   } catch (err) {
     dispatch(clearLoading());
-    // dispatch(setAlert(err.response.data.error, "error"));
+    dispatch(setAlert(err.response.data.error, "error"));
     dispatch(authFailure(err.response.data.error));
   }
 };
@@ -101,11 +101,11 @@ export const loginUser = (formData) => async (dispatch) => {
 
       dispatch(loadUser());
       dispatch(setToken(token));
-      // dispatch(setAlert("Logged in Successfully!", "success"));
+      dispatch(setAlert("Logged in Successfully!", "success"));
     }
   } catch (err) {
     dispatch(clearLoading());
-    // dispatch(setAlert(err.response.data.error, "error"));
+    dispatch(setAlert(err.response.data.error, "error"));
     dispatch(authFailure(err.response.data.error));
   }
 };
@@ -148,12 +148,12 @@ export const loginUser = (formData) => async (dispatch) => {
 //   }
 // };
 
-// //logout
-// export const logout = () => async (dispatch) => {
-//   dispatch(setLogout());
-//   await REQUESTS.logout();
-//   dispatch(setAlert("Logged out successfully", "success"));
-// };
+//logout
+export const logout = () => async (dispatch) => {
+  dispatch(setLogout());
+  // await REQUESTS.logout();
+  dispatch(setAlert("Logged out successfully", "success"));
+};
 
 // // send email for reset password
 // export const sendEmail = (email) => async (dispatch) => {

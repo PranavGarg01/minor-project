@@ -1,17 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-function Dashboard(props) {
+import React from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import Loading from "../components/layouts/Loading";
+const Dashboard = () => {
+	const { auth, loading } = useSelector(
+		(state) => ({
+			auth: state.auth,
+			loading: state.loading.loading,
+		}),
+		shallowEqual
+	);
 	return (
 		<div>
-			Dashboard
+			{auth.user == null || loading ? (
+				<Loading />
+			) : (
+				<>
+					Name : {auth.user.name}
+					Email :{auth.user.email}
+				</>
+			)}
 		</div>
-	)
-}
+	);
+};
 
-Dashboard.propTypes = {
-
-}
-
-export default Dashboard
-
+export default Dashboard;
