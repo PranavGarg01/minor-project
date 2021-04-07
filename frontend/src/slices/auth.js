@@ -56,8 +56,9 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch(setLoading());
     const res = await REQUESTS.getMe();
-    dispatch(clearLoading());
+
     dispatch(setCurrentUser(res));
+    dispatch(clearLoading());
   } catch (err) {
     dispatch(clearLoading());
     dispatch(authFailure(err.response.data.error));

@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense,useEffect } from "react";
 //routing
+import * as ROUTES from "./constants/routes";
 import { Switch, Link, BrowserRouter, Route } from "react-router-dom";
-import PrivateRoute from './components/routing/PrivateRoute';
-import NotFound from './components/routing/NotFound';
-import Alert from './components/layouts/Alert';
-import Navbar from "./components/Navbar/Navbar.js";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Register from "./views/Register.jsx";
-import Dashboard from "./views/Dashboard";
+import PrivateRoute from "./components/routing/PrivateRoute";
+import NotFound from "./components/routing/NotFound";
+import Loader from './components/layouts/Loading';
+import Alert from "./components/layouts/Alert";
+import Navbar from "./components/layouts/Navbar/Navbar.js";
+
 //auto login on refresh
 import { Provider } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
@@ -16,39 +15,54 @@ import store from "./store";
 import { loadUser } from "./slices/auth";
 //css
 import "./App.css";
+import { clearLoading, setLoading } from "./slices/loading";
+const Home = lazy(() => import('./views/Home'));
+const Login = lazy(() => import('./views/Login'));
+const Register = lazy(() => import('./views/Register'));
+const Dashboard = lazy(() => import('./views/dashboard/Dashboard'));
+const DisplayProfile = lazy(() => import('./views/dashboard/profile/DisplayProfile.jsx'));
 const App = () => {
 	useEffect(() => {
 		const loadMe = async () => {
 			if (localStorage.token) {
-				await setAuthToken(localStorage.token);
-				store.dispatch(loadUser());
+			  await setAuthToken(localStorage.token);
+			  store.dispatch(loadUser());
 			}
-		};
-		loadMe();
+		   else {store.dispatch(clearLoading())}} // this thing does loading : false if not logged in
+		  loadMe();
 	}, []);
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
+			<Suspense fallback={<Loader />}>
 				<Alert />
 				<Navbar />
 				<Alert />
 				<Switch>
-					<Route exact path='/'>
+					<Route exact path={ROUTES.HOME}>
 						<Home />
 					</Route>
-					<Route exact path='/login'>
+					<Route exact path={ROUTES.LOGIN}>
 						<Login />
 					</Route>
-					<Route exact path='/register'>
+					<Route exact path={ROUTES.REGISTER}>
 						<Register />
 					</Route>
-					<PrivateRoute exact path='/dashboard'>
+					{/* private routes */}
+					
+					<PrivateRoute exact path={ROUTES.DASHBOARD}>
 						<Dashboard />
 					</PrivateRoute>
+					<PrivateRoute exact path={ROUTES.MYPROFILE}>
+						<DisplayProfile />
+					</PrivateRoute>
+					
+					{/* 404 not found */}
 					<Route exact path='*'>
 						<NotFound />
 					</Route>
 				</Switch>
+				</Suspense>
 			</BrowserRouter>
 		</Provider>
 	);

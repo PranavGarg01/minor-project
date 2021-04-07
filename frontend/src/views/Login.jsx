@@ -26,6 +26,7 @@ const Login = (props) => {
 		};
 	  }, shallowEqual);
 	  const history = useHistory();
+	  console.log("login page " + isAuthenticated);
 	  useEffect(() => {
 		if (isAuthenticated) {
 		  history.push('/dashboard');

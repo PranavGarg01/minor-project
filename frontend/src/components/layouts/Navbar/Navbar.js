@@ -1,12 +1,14 @@
 import React, { Component, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { MenuItems, PrivateLinks } from "./MenuItems";
-import { Button } from "../Button";
+import { Button } from "./Button";
 import "./Navbar.css";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import { logout } from "../../slices/auth";
+import { logout } from "../../../slices/auth";
 
 const Navbar = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const [toggle, setToggle] = useState(false);
 	const { auth } = useSelector((state) => ({
@@ -19,7 +21,7 @@ const Navbar = () => {
 
 	return (
 		<nav className='NavbarItems'>
-			<h1 className='navbar-logo'>
+			<h1 className='navbar-logo' onClick={()=> history.push('/')}>
 				React<i className='fab fa-react'></i>
 			</h1>
 			<div className='menu-icon' onClick={handleClick}>

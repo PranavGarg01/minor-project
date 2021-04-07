@@ -31,12 +31,12 @@ export const MenuItems = [
 export const PrivateLinks = [
 	{
 		title: "Dashboard",
-		url: "/",
+		url: "/dashboard",
 		cName: "nav-links",
 	},
 	{
 		title: "My Profile",
-		url: "#",
+		url: "/dashboard/my-profile",
 		cName: "nav-links",
 	},
 	{
@@ -49,9 +49,9 @@ export const PrivateLinks = [
 	// 	url: "/login",
 	// 	cName: "nav-links",
 	// },
-	{
-		title: "Log Out",
-		url: "/register",
-		cName: "nav-links",
-	},
+	// {
+	// 	title: "Register",
+	// 	url: "/register",
+	// 	cName: "nav-links",
+	// },
 ];
