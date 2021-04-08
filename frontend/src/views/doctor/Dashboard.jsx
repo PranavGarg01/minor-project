@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Redirect } from "react-router";
 import Loading from "../../components/layouts/Loading";
-import { DOCTOR_DASHBOARD } from "../../constants/routes";
+import { DOCTOR_DASHBOARD, DASHBOARD } from "../../constants/routes";
 const Dashboard = () => {
 	const { auth, loading } = useSelector(
 		(state) => ({
@@ -15,8 +15,8 @@ const Dashboard = () => {
 		<div>
 			{auth.user == null || loading ? (
 				<Loading />
-			) : auth.user.role === "doctor" ? (
-				<Redirect to={DOCTOR_DASHBOARD} />
+			) : auth.user.role === "user" ? (
+				<Redirect to={DASHBOARD} />
 			) : (
 				<>
 					Name : {auth.user.name}

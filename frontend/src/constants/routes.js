@@ -19,6 +19,6 @@ export const NEWS = `${DASHBOARD}/news`;
 export const UPDATE_PASSWORD = `${DASHBOARD}/update-password`;
 export const UPDATE_DETAILS = `${DASHBOARD}/update-details`;
 
-//admin
-export const ADMIN_DASHBOARD = "/admin-dashboard";
-export const REPLY_ADMIN = "/admin-reply/:id";
+//doctor
+export const DOCTOR_DASHBOARD = "/doctor-dashboard";
+// export const REPLY_ADMIN = "/admin-reply/:id";

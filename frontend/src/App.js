@@ -29,6 +29,9 @@ const CreateProfile = lazy(() =>
 	import("./views/dashboard/profile/CreateProfile")
 );
 const EditProfile = lazy(() => import("./views/dashboard/profile/EditProfile"));
+
+//doctor
+const DoctorDashboard = lazy(() => import("./views/doctor/Dashboard.jsx"));
 const App = () => {
 	useEffect(() => {
 		const loadMe = async () => {
@@ -71,6 +74,11 @@ const App = () => {
 						</PrivateRoute>
 						<PrivateRoute exact path={ROUTES.UPDATEPROFILE}>
 							<EditProfile />
+						</PrivateRoute>
+
+						{/* doctor  */}
+						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
+							<DoctorDashboard />
 						</PrivateRoute>
 						{/* 404 not found */}
 						<Route exact path='*'>
