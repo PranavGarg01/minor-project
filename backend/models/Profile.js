@@ -23,14 +23,14 @@ const ProfileSchema = new mongoose.Schema({
   weight: {
     type: Number,
   },
-  // medicalHistory: {
-  //   type: [String],
-  //   required: [true, "Please add your medical history"],
-  // },
-  // deficiency: {
-  //   type: [String],
-  //   required: [true, "Please add any kind of allergies you have"],
-  // },
+  medicalHistory: {
+    type: [String],
+    required: [true, "Please add your medical history"],
+  },
+  deficiency: {
+    type: [String],
+    required: [true, "Please add any kind of allergies you have"],
+  },
 
   phoneNumber: {
     type: String,
