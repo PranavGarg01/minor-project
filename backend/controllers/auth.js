@@ -1,21 +1,22 @@
 const asyncHandler = require("../middleware/async");
 const crypto = require("crypto");
 const ErrorResponse = require("../utils/errorResponse");
-const Patient = require("../models/Patient");
+const User = require("../models/User");
 
 // @desc      Register user
 // @route     POST /api/auth/register
 // @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
-	const { name, email, password } = req.body;
+	const { name, email, password, role } = req.body;
 
-	// Create Patient
-	const patient = await Patient.create({
+	// Create User
+	const user = await User.create({
 		name,
 		email,
 		password,
+		role,
 	});
-	await sendTokenResponse(patient, 200, res);
+	await sendTokenResponse(user, 200, res);
 });
 
 // @desc      Login user
@@ -32,20 +33,20 @@ exports.login = asyncHandler(async (req, res, next) => {
 	}
 
 	// Check for user
-	const patient = await Patient.findOne({ email }).select("+password");
+	const user = await User.findOne({ email }).select("+password");
 
-	if (!patient) {
+	if (!user) {
 		return next(new ErrorResponse("Invalid credentials", 401));
 	}
 
 	// Check if password matches
-	const isMatch = await patient.matchPassword(password);
+	const isMatch = await user.matchPassword(password);
 
 	if (!isMatch) {
 		return next(new ErrorResponse("Invalid credentials", 401));
 	}
 
-	sendTokenResponse(patient, 200, res);
+	sendTokenResponse(user, 200, res);
 });
 
 // @desc      Update user details
@@ -58,7 +59,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 		// age: req.body.age,
 	};
 
-	const user = await Patient.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+	const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
 		new: true,
 		runValidators: true,
 	});
