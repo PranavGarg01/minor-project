@@ -3,9 +3,11 @@ import React, { lazy, Suspense, useEffect } from "react";
 import * as ROUTES from "./constants/routes";
 import { Switch, Link, BrowserRouter, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
+// import DoctorRoute from "./components/routing/DoctorRoute";
+
 //layouts
 import NotFound from "./components/routing/NotFound";
-import Loader from "./components/layouts/Loading";
+import Loading from "./components/layouts/Loading";
 import Alert from "./components/layouts/Alert";
 import Navbar from "./components/layouts/Navbar/Navbar.js";
 
@@ -18,6 +20,8 @@ import { loadUser } from "./slices/auth";
 import "./App.css";
 import { clearLoading, setLoading } from "./slices/loading";
 //components
+const DoctorRoute = lazy(() => import("./components/routing/DoctorRoute"));
+const UserRoute = lazy(() => import("./components/routing/UserRoute"));
 const Home = lazy(() => import("./views/Home"));
 const Login = lazy(() => import("./views/Login"));
 const Register = lazy(() => import("./views/Register"));
@@ -47,7 +51,7 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<BrowserRouter>
-				<Suspense fallback={<Loader />}>
+				<Suspense fallback={<Loading />}>
 					<Alert />
 					<Navbar />
 					<Alert />
@@ -63,22 +67,45 @@ const App = () => {
 						</Route>
 						{/* private routes */}
 
-						<PrivateRoute exact path={ROUTES.DASHBOARD}>
-							<Dashboard />
+						<PrivateRoute exact path={ROUTES.DASHBOARD} role='user'>
+							<UserRoute>
+								<Dashboard />
+							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute exact path={ROUTES.MYPROFILE}>
-							<DisplayProfile />
+						<PrivateRoute exact path={ROUTES.MYPROFILE} role='user'>
+							<UserRoute>
+								<DisplayProfile />
+							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute exact path={ROUTES.CREATEPROFILE}>
-							<CreateProfile />
+						<PrivateRoute
+							exact
+							path={ROUTES.CREATEPROFILE}
+							role='user'
+						>
+							<UserRoute>
+								<CreateProfile />
+							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute exact path={ROUTES.UPDATEPROFILE}>
-							<EditProfile />
+						<PrivateRoute
+							exact
+							path={ROUTES.UPDATEPROFILE}
+							role='user'
+						>
+							<UserRoute>
+								{" "}
+								<EditProfile />
+							</UserRoute>
 						</PrivateRoute>
 
 						{/* doctor  */}
-						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
-							<DoctorDashboard />
+						<PrivateRoute
+							exact
+							path={ROUTES.DOCTOR_DASHBOARD}
+							role='doctor'
+						>
+							<DoctorRoute>
+								<DoctorDashboard />
+							</DoctorRoute>
 						</PrivateRoute>
 						{/* 404 not found */}
 						<Route exact path='*'>

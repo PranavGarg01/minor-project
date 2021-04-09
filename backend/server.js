@@ -17,10 +17,10 @@ require("colors");
 connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// //Dev Logging Middleware
-// if (process.env.NODE_ENV === "development") {
-// 	app.use(morgan("dev"));
-//   }
+//Dev Logging Middleware
+if (1==1) {
+	app.use(morgan("dev"));
+  }
 //set security headers
 app.use(helmet({ contentSecurityPolicy: false }));
 

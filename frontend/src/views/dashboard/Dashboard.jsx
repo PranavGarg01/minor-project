@@ -13,19 +13,13 @@ const Dashboard = () => {
 	);
 	return (
 		<div>
-			{auth.user == null || loading ? (
-				<Loading />
-			) : auth.user.role === "doctor" ? (
-				<Redirect to={DOCTOR_DASHBOARD} />
-			) : (
-				<>
-					Name : {auth.user.name}
-					<br />
-					Email :{auth.user.email}
-					<br />
-					Role :{auth.user.role}
-				</>
-			)}
+			<>
+				Name : {auth.user.name}
+				<br />
+				Email :{auth.user.email}
+				<br />
+				Role :{auth.user.role}
+			</>
 		</div>
 	);
 };
