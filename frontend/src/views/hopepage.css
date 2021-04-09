@@ -11,16 +11,9 @@ body {
 }
 
 .banner {
-	position: relative;
-	width: 100%;
-	min-height: 100vh;
-	background-image: linear-gradient(
-		to bottom,
-		#045de9,
-		#246ff0,
-		#3b80f6,
-		#5091fb,
-		#66a2ff
-	); /* background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%); */
 	background-size: cover;
+	background-image: url("./img-5.png");
+	background-size: cover;
+	width: 100%;
+	height: 650px;
 }
