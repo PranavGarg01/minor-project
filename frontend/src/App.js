@@ -67,42 +67,29 @@ const App = () => {
 						</Route>
 						{/* private routes */}
 
-						<PrivateRoute exact path={ROUTES.DASHBOARD} role='user'>
+						<PrivateRoute exact path={ROUTES.DASHBOARD}>
 							<UserRoute>
 								<Dashboard />
 							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute exact path={ROUTES.MYPROFILE} role='user'>
+						<PrivateRoute exact path={ROUTES.MYPROFILE}>
 							<UserRoute>
 								<DisplayProfile />
 							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute
-							exact
-							path={ROUTES.CREATEPROFILE}
-							role='user'
-						>
+						<PrivateRoute exact path={ROUTES.CREATEPROFILE}>
 							<UserRoute>
 								<CreateProfile />
 							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute
-							exact
-							path={ROUTES.UPDATEPROFILE}
-							role='user'
-						>
+						<PrivateRoute exact path={ROUTES.UPDATEPROFILE}>
 							<UserRoute>
-								{" "}
 								<EditProfile />
 							</UserRoute>
 						</PrivateRoute>
 
 						{/* doctor  */}
-						<PrivateRoute
-							exact
-							path={ROUTES.DOCTOR_DASHBOARD}
-							role='doctor'
-						>
+						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
 							<DoctorRoute>
 								<DoctorDashboard />
 							</DoctorRoute>

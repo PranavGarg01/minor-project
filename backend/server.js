@@ -43,7 +43,7 @@ app.use(cors());
 //routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/profile", require("./routes/profile"));
-// app.use('/api/auth',require('./routes/auth'))
+app.use('/api/prescription',require('./routes/prescription'))
 // app.use('/api/property',require('./routes/property'))
 
 app.get("/api/", (req, res) => {
