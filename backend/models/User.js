@@ -6,6 +6,11 @@ const config = require("config");
 const jwtSecret = config.get("jwtSecret");
 
 const UserSchema = new mongoose.Schema({
+	uuid: {
+		type: String,
+		required: [true, "Please add uuid"],
+		unique: true,
+	},
 	name: {
 		type: String,
 		required: [true, "Please add a name"],

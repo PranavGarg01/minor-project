@@ -2,15 +2,19 @@ const asyncHandler = require("../middleware/async");
 const crypto = require("crypto");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
+const { customAlphabet } = require('nanoid');
 
 // @desc      Register user
 // @route     POST /api/auth/register
 // @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
 	const { name, email, password, role } = req.body;
+	const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
+	const nanoid = customAlphabet(alphabet, 5);
 
 	// Create User
 	const user = await User.create({
+		uuid: nanoid(),
 		name,
 		email,
 		password,
