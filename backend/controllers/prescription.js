@@ -6,7 +6,7 @@ const Prescription = require("../models/Prescription");
 // //@route  GET /api/prescription/doctor
 // //@access private
 exports.getDoctorPrescriptions = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.find({doctor : req.user.id});
+	const prescription = await Prescription.find({doctor : req.user.id}).populate("doctor");
 	res.status(200).json({
 		success: true,
 		count: prescription.length,
@@ -18,7 +18,7 @@ exports.getDoctorPrescriptions = asyncHandler(async (req, res, next) => {
 //@route  GET /api/prescription/:userId
 //@access private
 exports.getUserPrescriptions = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.find({ user: req.params.userId });
+	const prescription = await Prescription.find({ user: req.params.userId }).populate("doctor");
 	res.status(200).json({ success: true, data: prescription });
 });
 
@@ -26,7 +26,9 @@ exports.getUserPrescriptions = asyncHandler(async (req, res, next) => {
 //@route  GET /api/prescription/me
 //@access private
 exports.getMyPrescriptions = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.find({ user: req.user.id });
+	const prescription = await Prescription.find({
+		user: req.user.id,
+	}).populate("doctor");
 	res.status(200).json({ success: true, data: prescription });
 });
 

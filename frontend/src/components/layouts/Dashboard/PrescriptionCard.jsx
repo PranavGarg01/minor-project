@@ -30,9 +30,19 @@ const useStyles = makeStyles({
 	},
 });
 
-const PrescriptionCard = () => {
+const PrescriptionCard = (props) => {
 	const classes = useStyles();
-
+	const {examination,date, doctorName,doctorSpeciality} = props;
+	var date2 = new Date(date);
+	var monthNames = [
+		"Jan", "Feb", "Mar",
+		"Apr", "May", "Jun", "Jul",
+		"Aug", "Sep", "Oct",
+		"Nov", "Dec"
+	 ];
+   var d = date2.getDate();
+   var m = monthNames[date2.getMonth()];
+   var y = date2.getFullYear();
 	return (
 		<div>
 			<Card elevation={4} className={classes.root}>
@@ -50,21 +60,21 @@ const PrescriptionCard = () => {
 							textAlign: "center",
 						}}
 					>
-						<span style={{ marginLeft: "10px" }}>23 Sep</span>
+						<span style={{ marginLeft: "10px" }}>{`${d} ${m}`}</span>
 					</Typography>
 					<Typography
 						variant="h5"
 						component="h2"
 						style={{ marginTop: "1rem", marginLeft: "1rem" }}
 					>
-						Dr. Shreyanshi Dhir
+						{doctorName}
 					</Typography>
 					<Typography
 						className={classes.pos}
 						color="textSecondary"
 						style={{ marginLeft: "1rem" }}
 					>
-						Heart specialist
+						{doctorSpeciality}
 					</Typography>
 					<hr
 						style={{
@@ -80,12 +90,7 @@ const PrescriptionCard = () => {
 						component="p"
 						style={{ marginLeft: "1rem", marginTop: "1.4rem" }}
 					>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Integer nec odio. Praesent libero. Sed cursus ante
-						dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-						imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce
-						nec tellus sed augue semper porta. Mauris massa.
-						Vestibulum lacinia arcu eget nulla.
+						{examination}
 					</Typography>
 				</CardContent>
 				<CardActions>
@@ -108,3 +113,11 @@ const PrescriptionCard = () => {
 };
 
 export default PrescriptionCard;
+
+PrescriptionCard.defaultProps = {
+	date : Date.now(),
+	doctorName : "Dr. Thomas Crane",
+	doctorSpeciality : "Heart Speciality",
+	examination : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.",
+	link : "#"
+}

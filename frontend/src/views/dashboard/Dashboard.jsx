@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { MUItheme } from "../../theme.js";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./Dashboard.css";
@@ -8,6 +8,7 @@ import { DOCTOR_DASHBOARD } from "../../constants/routes";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import PrescriptionCard from "../../components/layouts/Dashboard/PrescriptionCard";
+import { getMyPrescriptions } from "../../slices/prescription.js";
 
 const useStyles = makeStyles((theme) => ({
 	large: {
@@ -23,15 +24,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
-	const { auth, loading } = useSelector(
+	const { auth, loading,prescriptions } = useSelector(
 		(state) => ({
 			auth: state.auth,
 			loading: state.loading.loading,
+			prescriptions: state.prescription.prescriptions,
 		}),
 		shallowEqual
 	);
 	const classes = useStyles();
-
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getMyPrescriptions());
+	}, [])
 	return (
 		<div>
 			<ThemeProvider theme={MUItheme}>
@@ -101,9 +106,10 @@ const Dashboard = () => {
 					</div>
 					<div>
 						<Grid container>
-							<Grid item xs={12} md={4}>
-								<PrescriptionCard />
-							</Grid>
+							{prescriptions.length != 0 && prescriptions.map((i)=> <Grid item xs={12} md={4}>
+								<PrescriptionCard date={i.date} examination={i.examination} doctorName={i.doctor.name}/>
+							</Grid>)}
+							
 							<Grid item xs={12} md={4}>
 								<PrescriptionCard />
 							</Grid>
@@ -112,12 +118,6 @@ const Dashboard = () => {
 							</Grid>
 						</Grid>
 					</div>
-
-					{/* Name : {auth.user.name}
-				<br />
-				Email :{auth.user.email}
-				<br />
-				Role :{auth.user.role} */}
 				</div>
 			</ThemeProvider>
 		</div>
