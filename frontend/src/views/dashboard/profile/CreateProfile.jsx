@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Text, PseudoBox, Flex } from "@chakra-ui/core";
 import { setAlert } from "../../../slices/alert";
+import Image from "../img-9.png";
 import { createProfile } from "../../../slices/profile";
 import Loader from "../../../components/layouts/Loading";
 import {
@@ -20,26 +20,10 @@ import {
 	Input,
 	Checkbox,
 	ListItemText,
-} from "@material-ui/core";
-import {
+	Paper,
+	Typography,
 	Button,
-	Card,
-	CardHeader,
-	CardBody,
-	CardFooter,
-	CardImg,
-	CardTitle,
-	Label,
-	FormGroup,
-	Form,
-	// Input,
-	InputGroupAddon,
-	InputGroupText,
-	InputGroup,
-	Container,
-	Row,
-	Col,
-} from "reactstrap";
+} from "@material-ui/core";
 
 const CreateProfile = () => {
 	const { loading } = useSelector((state) => {
@@ -118,281 +102,269 @@ const CreateProfile = () => {
 	};
 
 	return (
-		<Grid container justify='center' alignItems='center'>
+		<Grid container justify="center" alignItems="center">
 			<Grid item container md={6} sm={12} style={{ marginTop: "3rem" }}>
 				{/* <form onSubmit={onSubmit}> */}
 				{loading && <Loader />}
-				<Card
-					className='card-register'
-					style={{ border: "12px" }}
+				<Paper
+					elevation={3}
 					style={{
-						background:
-							"linear-gradient(90deg, rgba(239,118,128,1) 43%, rgba(241,133,116,1) 82%)",
+						padding: "5rem",
+						width: "100%",
+						minWidth: "80%",
+						backgroundColor: "#CFEBFD",
+						backgroundImage: `url(${Image})`,
+						backgroundSize: "cover",
 					}}
 				>
-					<CardHeader>
-						{/* <CardImg
-              alt='...'
-              src={require('../../../../assets/img/square-purple-1.png')}
-            /> */}
-						<CardTitle
-							tag='small'
-							style={{ fontSize: "3.2rem", lineHeight: "none" }}
-						>
-							Create Profile
-						</CardTitle>
-					</CardHeader>
-					<Form onSubmit={onSubmit} className='form'>
-						<CardBody>
-							<Grid item xs={12}>
-								<FormControl
-									style={{
-										width: "100%",
-										margin: "11px auto",
-									}}
-								>
-									<InputLabel
-										style={{
-											fontFamily: "Poppins",
-											fontWeight: "bold",
-											fontSize: "1rem",
-										}}
-									>
-										Gender
-									</InputLabel>
-									<Select
-										fullWidth
-										name='gender'
-										open={open}
-										onClose={handleClose}
-										onOpen={handleOpen}
-										value={gender}
-										onChange={onChange}
-									>
-										<MenuItem value='male'>Male</MenuItem>
-										<MenuItem value='female'>
-											Female
-										</MenuItem>
-										<MenuItem value='others'>
-											Others
-										</MenuItem>
-									</Select>
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl
-									style={{
-										width: "100%",
-										margin: "11px auto",
-									}}
-								>
-									<InputLabel
-										style={{
-											fontFamily: "Poppins",
-											fontWeight: "bold",
-											fontSize: "1rem",
-										}}
-									>
-										Blood Group
-									</InputLabel>
-									<Select
-										name='bloodGroup'
-										open={open2}
-										onClose={handleClose2}
-										onOpen={handleOpen2}
-										value={bloodGroup}
-										onChange={onChange}
-									>
-										{bloodGroupsArray.map((item, i) => (
-											<MenuItem key={i} value={item}>
-												{item}
-											</MenuItem>
-										))}
-									</Select>
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									type='number'
-									size='small'
-									style={{ margin: "11px auto" }}
-									fullWidth
-									label={
-										<span
-											style={{
-												fontFamily: "Poppins",
-												fontWeight: "bold",
-												fontSize: "1rem",
-											}}
-										>
-											Height in meters
-										</span>
-									}
-									name='height'
-									value={height}
-									onChange={onChange}
-									placeholder='Height in meters'
-									variant='outlined'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									type='number'
-									size='small'
-									style={{ margin: "11px auto" }}
-									fullWidth
-									name='weight'
-									label={
-										<span
-											style={{
-												fontFamily: "Poppins",
-												fontWeight: "bold",
-												fontSize: "1rem",
-											}}
-										>
-											Weight in Kgs
-										</span>
-									}
-									value={weight}
-									onChange={onChange}
-									placeholder='Weight in Kgs'
-									variant='outlined'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									type='text'
-									size='small'
-									style={{ margin: "11px auto" }}
-									fullWidth
-									label={
-										<span
-											style={{
-												fontFamily: "Poppins",
-												fontWeight: "bold",
-												fontSize: "1rem",
-											}}
-										>
-											Contact Number
-										</span>
-									}
-									name='phoneNumber'
-									value={phoneNumber}
-									onChange={onChange}
-									placeholder='eg: +91-1234567893'
-									variant='outlined'
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl
-									style={{
-										width: "100%",
-										margin: "18px auto",
-									}}
-								>
-									<InputLabel
-										style={{
-											fontFamily: "Poppins",
-											fontWeight: "bold",
-											fontSize: "1rem",
-										}}
-										id='demo-mutiple-name-label'
-									>
-										Medical History
-									</InputLabel>
-									<Select
-										multiple
-										variant='outlined'
-										name='medicalHistory'
-										value={medicalHistory}
-										renderValue={(selected) =>
-											selected.join(", ")
-										}
-										onChange={onChange}
-										input={<Input />}
-										MenuProps={MenuProps}
-									>
-										{historyArray.map((history) => (
-											<MenuItem
-												key={history}
-												value={history}
-											>
-												<Checkbox
-													checked={
-														medicalHistory.indexOf(
-															history
-														) > -1
-													}
-												/>
-												<ListItemText
-													primary={history}
-												/>
-											</MenuItem>
-										))}
-									</Select>
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl
-									style={{
-										width: "100%",
-										margin: "18px auto",
-									}}
-								>
-									<InputLabel
-										style={{
-											fontFamily: "Poppins",
-											fontWeight: "bold",
-											fontSize: "1rem",
-										}}
-										id='demo-mutiple-name-label'
-									>
-										Deficiency
-									</InputLabel>
-									<Select
-										multiple
-										variant='outlined'
-										name='deficiency'
-										value={deficiency}
-										renderValue={(selected) =>
-											selected.join(", ")
-										}
-										onChange={onChange}
-										input={<Input />}
-										MenuProps={MenuProps}
-									>
-										{deficiencyArray.map((allergy) => (
-											<MenuItem
-												key={allergy}
-												value={allergy}
-											>
-												<Checkbox
-													checked={
-														deficiency.indexOf(
-															allergy
-														) > -1
-													}
-												/>
-												<ListItemText
-													primary={allergy}
-												/>
-											</MenuItem>
-										))}
-									</Select>
-								</FormControl>
-							</Grid>
-						</CardBody>
-						<div style={{ padding: "1rem" }}>
-							<Button
-								className='btn-round'
-								color='danger'
-								type='submit'
+					<Typography
+						style={{
+							fontSize: "3.5rem",
+							lineHeight: "none",
+							textAlign: "center",
+							marginBottom: "2rem",
+						}}
+						color="primary"
+					>
+						CREATE PROFILE
+					</Typography>
+					<form onSubmit={onSubmit} className="form">
+						<Grid item xs={12}>
+							<FormControl
+								style={{
+									width: "100%",
+									margin: "11px auto",
+								}}
 							>
-								<span>Create Profile</span>
+								<InputLabel
+									style={{
+										fontFamily: "Poppins",
+										fontWeight: "bold",
+										fontSize: "1rem",
+									}}
+								>
+									Gender
+								</InputLabel>
+								<Select
+									fullWidth
+									name="gender"
+									open={open}
+									onClose={handleClose}
+									onOpen={handleOpen}
+									value={gender}
+									onChange={onChange}
+								>
+									<MenuItem value="male">Male</MenuItem>
+									<MenuItem value="female">Female</MenuItem>
+									<MenuItem value="others">Others</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl
+								style={{
+									width: "100%",
+									margin: "11px auto",
+								}}
+							>
+								<InputLabel
+									style={{
+										fontFamily: "Poppins",
+										fontWeight: "bold",
+										fontSize: "1rem",
+									}}
+								>
+									Blood Group
+								</InputLabel>
+								<Select
+									name="bloodGroup"
+									open={open2}
+									onClose={handleClose2}
+									onOpen={handleOpen2}
+									value={bloodGroup}
+									onChange={onChange}
+								>
+									{bloodGroupsArray.map((item, i) => (
+										<MenuItem key={i} value={item}>
+											{item}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								type="number"
+								size="small"
+								style={{ margin: "11px auto" }}
+								fullWidth
+								label={
+									<span
+										style={{
+											fontFamily: "Poppins",
+											fontWeight: "bold",
+											fontSize: "1rem",
+										}}
+									>
+										Height in meters
+									</span>
+								}
+								name="height"
+								value={height}
+								onChange={onChange}
+								placeholder="Height in meters"
+								variant="outlined"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								type="number"
+								size="small"
+								style={{ margin: "11px auto" }}
+								fullWidth
+								name="weight"
+								label={
+									<span
+										style={{
+											fontFamily: "Poppins",
+											fontWeight: "bold",
+											fontSize: "1rem",
+										}}
+									>
+										Weight in Kgs
+									</span>
+								}
+								value={weight}
+								onChange={onChange}
+								placeholder="Weight in Kgs"
+								variant="outlined"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								type="text"
+								size="small"
+								style={{ margin: "11px auto" }}
+								fullWidth
+								label={
+									<span
+										style={{
+											fontFamily: "Poppins",
+											fontWeight: "bold",
+											fontSize: "1rem",
+										}}
+									>
+										Contact Number
+									</span>
+								}
+								name="phoneNumber"
+								value={phoneNumber}
+								onChange={onChange}
+								placeholder="eg: +91-1234567893"
+								variant="outlined"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl
+								style={{
+									width: "100%",
+									margin: "18px auto",
+								}}
+							>
+								<InputLabel
+									style={{
+										fontFamily: "Poppins",
+										fontWeight: "bold",
+										fontSize: "1rem",
+									}}
+									id="demo-mutiple-name-label"
+								>
+									Medical History
+								</InputLabel>
+								<Select
+									multiple
+									variant="outlined"
+									name="medicalHistory"
+									value={medicalHistory}
+									renderValue={(selected) =>
+										selected.join(", ")
+									}
+									onChange={onChange}
+									input={<Input />}
+									MenuProps={MenuProps}
+								>
+									{historyArray.map((history) => (
+										<MenuItem key={history} value={history}>
+											<Checkbox
+												checked={
+													medicalHistory.indexOf(
+														history
+													) > -1
+												}
+											/>
+											<ListItemText primary={history} />
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControl
+								style={{
+									width: "100%",
+									margin: "18px auto",
+								}}
+							>
+								<InputLabel
+									style={{
+										fontFamily: "Poppins",
+										fontWeight: "bold",
+										fontSize: "1rem",
+									}}
+									id="demo-mutiple-name-label"
+								>
+									Deficiency
+								</InputLabel>
+								<Select
+									multiple
+									variant="outlined"
+									name="deficiency"
+									value={deficiency}
+									renderValue={(selected) =>
+										selected.join(", ")
+									}
+									onChange={onChange}
+									input={<Input />}
+									MenuProps={MenuProps}
+								>
+									{deficiencyArray.map((allergy) => (
+										<MenuItem key={allergy} value={allergy}>
+											<Checkbox
+												checked={
+													deficiency.indexOf(
+														allergy
+													) > -1
+												}
+											/>
+											<ListItemText primary={allergy} />
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+
+						<div>
+							<Button
+								type="submit"
+								style={{ width: "100%", marginTop: "2rem" }}
+								variant="contained"
+								color="primary"
+							>
+								CREATE
 							</Button>
 						</div>
-					</Form>
-				</Card>
+					</form>
+				</Paper>
 			</Grid>
 		</Grid>
 	);
