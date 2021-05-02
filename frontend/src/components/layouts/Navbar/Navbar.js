@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { MenuItems, PrivateLinks } from "./MenuItems";
+import { MenuItems, UserLinks, DoctorLinks } from "./MenuItems";
 import { Button } from "./Button";
 import "./Navbar.css";
 import ReorderIcon from "@material-ui/icons/Reorder";
@@ -21,7 +21,7 @@ const Navbar = () => {
 
 	return (
 		<nav className='NavbarItems'>
-			<h1 className='navbar-logo' onClick={()=> history.push('/')}>
+			<h1 className='navbar-logo' onClick={() => history.push("/")}>
 				React<i className='fab fa-react'></i>
 			</h1>
 			<div className='menu-icon' onClick={handleClick}>
@@ -29,7 +29,7 @@ const Navbar = () => {
 			</div>
 			<ul className={toggle ? "nav-menu active" : "nav-menu"}>
 				{!auth.isAuthenticated
-					? (MenuItems.map((item, index) => {
+					? MenuItems.map((item, index) => {
 							return (
 								<li key={index}>
 									<a className={item.cName} href={item.url}>
@@ -37,18 +37,26 @@ const Navbar = () => {
 									</a>
 								</li>
 							);
-					  }))
-					: 
-					(
-						PrivateLinks.map((item, index) =>
-								<li key={index}>
-									<a className={item.cName} href={item.url}>
-										{item.title}
-									</a>
-								</li>
-						)
-					)}</ul>
-					   {auth.isAuthenticated && <Button onClick={()=>dispatch(logout())}>Logout</Button>	}	
+					  })
+					: auth.user && auth.user.role == "doctor"
+					? DoctorLinks.map((item, index) => (
+							<li key={index}>
+								<a className={item.cName} href={item.url}>
+									{item.title}
+								</a>
+							</li>
+					  ))
+					: UserLinks.map((item, index) => (
+							<li key={index}>
+								<a className={item.cName} href={item.url}>
+									{item.title}
+								</a>
+							</li>
+					  ))}
+			</ul>
+			{auth.isAuthenticated && (
+				<Button onClick={() => dispatch(logout())}>Logout</Button>
+			)}
 
 			{/* <Button>Sign Up</Button> */}
 		</nav>

@@ -3,7 +3,6 @@ import React, { lazy, Suspense, useEffect } from "react";
 import * as ROUTES from "./constants/routes";
 import { Switch, Link, BrowserRouter, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
-// import DoctorRoute from "./components/routing/DoctorRoute";
 
 //layouts
 import NotFound from "./components/routing/NotFound";

@@ -1,5 +1,5 @@
 const express = require("express");
-const { createPrescription, getUserPrescriptions, getMyPrescriptions, getDoctorPrescriptions } = require("../controllers/prescription");
+const { createPrescription, getUserPrescriptions, getMyPrescriptions, getDoctorPrescriptions,getUserDetails } = require("../controllers/prescription");
 const router = express.Router();
 
 const { protect } = require("../middleware/auth");
@@ -14,6 +14,9 @@ router.get("/me", getMyPrescriptions);
 
 //get prescriptions by user id
 router.get("/:userId", getUserPrescriptions);
+
+//get user Details from uuid
+router.get("/user/:uuid", getUserDetails);
 
 //create Rx
 router.post("/", createPrescription);

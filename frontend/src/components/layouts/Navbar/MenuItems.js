@@ -28,7 +28,7 @@ export const MenuItems = [
 
 //private links
 
-export const PrivateLinks = [
+export const UserLinks = [
 	{
 		title: "Dashboard",
 		url: "/dashboard",
@@ -41,6 +41,34 @@ export const PrivateLinks = [
 	},
 	{
 		title: "TBD",
+		url: "#",
+		cName: "nav-links",
+	},
+	// {
+	// 	title: "Login",
+	// 	url: "/login",
+	// 	cName: "nav-links",
+	// },
+	// {
+	// 	title: "Register",
+	// 	url: "/register",
+	// 	cName: "nav-links",
+	// },
+];
+
+export const DoctorLinks = [
+	{
+		title: "Dashboard",
+		url: "/doctor-dashboard",
+		cName: "nav-links",
+	},
+	{
+		title: "My Profile",
+		url: "/dashboard/my-profile",
+		cName: "nav-links",
+	},
+	{
+		title: "New Prescription",
 		url: "#",
 		cName: "nav-links",
 	},
