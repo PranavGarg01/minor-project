@@ -1,15 +1,15 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getMyProfile } from "../../../slices/profile";
+import { getMyDocProfile } from "../../../slices/profile";
 import { useSelector, shallowEqual } from "react-redux";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import "./DisplayProfile.css";
 import { PseudoBox, Flex, Text } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import { CREATEPROFILE, UPDATEPROFILE } from "../../../constants/routes";
+import { CREATEPROFILE, DOCTOR_UPDATEPROFILE, UPDATEPROFILE } from "../../../constants/routes";
 // import { CardBody, CardFooter } from "reactstrap";
-import sqimg from "../../../assets/img/square-purple-1.png";
+import userPic from "../docProfile/53571.jpg";
 
 const useStyles = makeStyles((theme) => ({
 	large: {
@@ -26,14 +26,9 @@ const useStyles = makeStyles((theme) => ({
 const DisplayProfile = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getMyProfile());
+		dispatch(getMyDocProfile());
 		//eslint-disable-next-line
 	}, []);
-	// const { myProfile } = useSelector((state) => {
-	// 	return {
-	// 		myProfile: state.profile.myProfile,
-	// 	};
-	// }, shallowEqual);
 
 	useEffect(() => {
 		document.body.classList.toggle("register-page");
@@ -268,7 +263,7 @@ const DisplayProfile = () => {
 							<div class='profile-box'>
 								<Avatar
 									alt='Insert the name initial here'
-									src='https://m.cricbuzz.com/a/img/v1/192x192/i1/c170661/virat-kohli.jpg'
+									src={userPic}
 									className={classes.large}
 								/>
 								<span class='profile-name'>
@@ -296,23 +291,23 @@ const DisplayProfile = () => {
 									</div>
 								</div>
 								<Link
-									style={{
-										textDecoration: "none",
-										color: "white",
-									}}
-									to={UPDATEPROFILE}
-								>
-									<Button
-										variant='contained'
-										color='primary'
 										style={{
-											width: "70%",
-											marginBottom: "3rem",
+											textDecoration: "none",
+											color: "white",
 										}}
-									>
+										to={DOCTOR_UPDATEPROFILE}
+									><Button
+									variant='contained'
+									color='primary'
+									style={{
+										width: "70%",
+										marginBottom: "3rem",
+									}}
+								>
+									
 										<span>Update Profile</span>
-									</Button>
-								</Link>
+									
+								</Button></Link>
 							</div>
 						</div>
 					</Grid>
@@ -359,7 +354,7 @@ const DisplayProfile = () => {
 										color='textSecondary'
 										variant='h5'
 									>
-										Blood Group:
+										Specialization:
 										<span
 											style={{
 												fontSize: "2.5rem",
@@ -367,7 +362,7 @@ const DisplayProfile = () => {
 												color: "#2F4F4F",
 											}}
 										>
-											{myProfile.bloodGroup}
+											{myProfile.specialization}
 										</span>
 									</Typography>
 									<Typography
@@ -375,33 +370,18 @@ const DisplayProfile = () => {
 										color='textSecondary'
 										variant='h5'
 									>
-										Height:
+										License No.:
 										<span
 											style={{
 												fontSize: "2.5rem",
-												marginLeft: "6.3rem",
+												marginLeft: "1rem",
 												color: "#2F4F4F",
 											}}
 										>
-											{myProfile.height}
+											{myProfile.licenseNo}
 										</span>
 									</Typography>
-									<Typography
-										style={{ marginTop: "2.5rem" }}
-										color='textSecondary'
-										variant='h5'
-									>
-										Weight:
-										<span
-											style={{
-												fontSize: "2.5rem",
-												marginLeft: "6.4rem",
-												color: "#2F4F4F",
-											}}
-										>
-											{myProfile.weight}
-										</span>
-									</Typography>
+
 									<Typography
 										style={{ marginTop: "2.5rem" }}
 										color='textSecondary'
@@ -411,91 +391,11 @@ const DisplayProfile = () => {
 										<span
 											style={{
 												fontSize: "2rem",
-												marginLeft: "0.4em",
+												marginLeft: "1em",
 												color: "#2F4F4F",
 											}}
 										>
 											{myProfile.phoneNumber}
-										</span>
-									</Typography>
-								</div>
-							</Grid>
-
-							<Grid item xs={12} md={6}>
-								<div style={{ marginLeft: "2rem" }}>
-									<Typography
-										style={{
-											marginTop: "3.5rem",
-										}}
-										color='textSecondary'
-										variant='h5'
-									>
-										Medical Histories:
-										<span
-											style={{
-												marginLeft: "6rem",
-											}}
-										>
-											{myProfile.medicalHistory.map(
-												(item, i) => (
-													<Typography
-														style={{
-															color: "#2F4F4F",
-															fontSize: "2rem",
-														}}
-													>
-														{myProfile
-															.medicalHistory
-															.length !==
-														i + 1 ? (
-															<Fragment>
-																{item}
-																{","}
-															</Fragment>
-														) : (
-															<Fragment>
-																{item}
-															</Fragment>
-														)}
-													</Typography>
-												)
-											)}
-										</span>
-									</Typography>
-									<Typography
-										style={{ marginTop: "4rem" }}
-										color='textSecondary'
-										variant='h5'
-									>
-										Deficiencies:
-										<span
-											style={{
-												marginLeft: "6rem",
-											}}
-										>
-											{myProfile.deficiency.map(
-												(item, i) => (
-													<Typography
-														style={{
-															fontSize: "2rem",
-															color: "#2F4F4F",
-														}}
-													>
-														{myProfile.deficiency
-															.length !==
-														i + 1 ? (
-															<Fragment>
-																{item}
-																{","}
-															</Fragment>
-														) : (
-															<Fragment>
-																{item}
-															</Fragment>
-														)}
-													</Typography>
-												)
-											)}
 										</span>
 									</Typography>
 								</div>

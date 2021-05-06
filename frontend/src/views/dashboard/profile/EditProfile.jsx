@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setAlert } from "../../../slices/alert";
-import { editProfile } from "../../../slices/profile";
+import { editProfile, getMyProfile } from "../../../slices/profile";
 import Image from "../img-9.png";
 
 import Loader from "../../../components/layouts/Loading";
@@ -27,21 +27,29 @@ import {
 } from "@material-ui/core";
 
 const EditProfile = () => {
+	
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const [data, setData] = useState({
+		gender: "loading",
+		bloodGroup: "loading",
+		height: "loading",
+		weight: "loading",
+		phoneNumber: "loading",
+		medicalHistory: ["loading"],
+		deficiency: ["loading"],
+	});
 	const { loading, myProfile } = useSelector((state) => {
 		return {
 			loading: state.loading.loading,
 			myProfile: state.profile.myProfile,
 		};
 	}, shallowEqual);
-	const dispatch = useDispatch();
-	const history = useHistory();
 	useEffect(() => {
-		document.body.classList.toggle("register-page");
-		return () => {
-			document.body.classList.toggle("register-page");
-		};
-	});
-	const [data, setData] = useState({
+		dispatch(getMyProfile());
+	},[]);
+	useEffect(() => {
+	if(myProfile !==null) setData({
 		gender: myProfile.gender,
 		bloodGroup: myProfile.bloodGroup,
 		height: myProfile.height,
@@ -50,6 +58,8 @@ const EditProfile = () => {
 		medicalHistory: myProfile.medicalHistory,
 		deficiency: myProfile.deficiency,
 	});
+	}, [myProfile])
+	
 	const {
 		gender,
 		bloodGroup,
@@ -111,10 +121,11 @@ const EditProfile = () => {
 	};
 
 	return (
-		<Grid container justify="center" alignItems="center">
+		<>{loading && <Loader />}
+		{(myProfile !==null) && (<Grid container justify="center" alignItems="center">
 			<Grid item container md={6} sm={12} style={{ margin: "2rem auto" }}>
 				{/* <form onSubmit={onSubmit}> */}
-				{loading && <Loader />}
+				
 				<Paper
 					elevation={3}
 					style={{
@@ -376,7 +387,8 @@ const EditProfile = () => {
 					</form>
 				</Paper>
 			</Grid>
-		</Grid>
+		</Grid>)}
+		</>
 	);
 };
 

@@ -64,7 +64,7 @@ export const DoctorLinks = [
 	},
 	{
 		title: "My Profile",
-		url: "/dashboard/my-profile",
+		url: "/doctor-dashboard/my-profile",
 		cName: "nav-links",
 	},
 	{
