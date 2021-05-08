@@ -21,5 +21,6 @@ export const UPDATE_DETAILS = `${DASHBOARD}/update-details`;
 
 //doctor
 export const DOCTOR_DASHBOARD = "/doctor-dashboard";
+export const NEW_PRESCRIPTION = `${DOCTOR_DASHBOARD}/new-prescription`;
 export const DOCTOR_PROFILE = `${DOCTOR_DASHBOARD}/my-profile`;
 export const DOCTOR_UPDATEPROFILE = `${DOCTOR_DASHBOARD}/update-profile`;

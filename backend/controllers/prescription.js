@@ -50,7 +50,7 @@ exports.createPrescription = asyncHandler(async (req, res, next) => {
 
 	await Prescription.create(req.body);
 
-	res.status(200).json({ success: true, data: "Rx created" });
+	res.status(200).json({ success: true, data: {response : "Rx created"} });
 });
 
 //@desc   get user detials

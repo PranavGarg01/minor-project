@@ -16,12 +16,12 @@ const PrescriptionSchema = new mongoose.Schema({
 	examination: {
 		type: String,
 	},
-  medicines : {
-    type: String,
-  },
-  followUp: {
-    type: Date,
-  }
+	medicines: {
+		type: String,
+	},
+	followUp: {
+		type: Date,
+	},
 });
 
 module.exports = mongoose.model("prescription", PrescriptionSchema);

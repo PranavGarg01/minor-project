@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { setAlert } from "./alert";
 import { setLoading, clearLoading } from "./loading";
 import * as REQUESTS from "../api/prescription";
+import { DOCTOR_DASHBOARD } from "../constants/routes";
 
 const initialState = {
 	prescription: null,
@@ -44,7 +45,7 @@ export const getMyPrescriptions = () => async (dispatch) => {
 export const getUserPrescriptions = (id) => async (dispatch) => {
 	try {
 		dispatch(setLoading());
-		const userPrescriptions = await REQUESTS.getUserPrescriptions();
+		const userPrescriptions = await REQUESTS.getUserPrescriptions(id);
 		dispatch(setPrescriptions(userPrescriptions));
 		dispatch(clearLoading());
 	} catch (err) {
@@ -65,11 +66,25 @@ export const getDoctorPrescriptions = () => async (dispatch) => {
 	}
 };
 
-export const createPrescription = () => async (dispatch) => {
+export const createPrescription = (formData, history) => async (dispatch) => {
 	try {
 		dispatch(setLoading());
-		await REQUESTS.createPrescription();
+		const res = await REQUESTS.createPrescription(formData);
+		dispatch(clearLoading());
 		dispatch(setAlert("Rx Created", "success"));
+		history.push(DOCTOR_DASHBOARD);
+	} catch (err) {
+		dispatch(clearLoading());
+		console.log(err.response.data.error);
+	}
+};
+
+export const getUserDetails = (uuid) => async (dispatch) => {
+	try {
+		dispatch(setLoading());
+		const userDetails = await REQUESTS.getUserDetails(uuid);
+		dispatch(setAlert("Found User", "success"));
+		dispatch(setMyPrescription(userDetails));
 		dispatch(clearLoading());
 	} catch (err) {
 		dispatch(clearLoading());

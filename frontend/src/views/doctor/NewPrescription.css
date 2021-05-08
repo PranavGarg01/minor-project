@@ -1,0 +1,42 @@
+.reader {
+	position: relative;
+  width: 100%;
+}
+.reader:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+  }
+  @media (min-width:900px) { 
+    .sheet {
+        width : 35%;
+        margin-top : 35%;
+    }
+}
+@media (max-width:900px) { 
+    .sheet {
+        width : 50%;
+        margin-top : 50%;
+    }
+}
+@media (max-width:768px){ 
+    .sheet {
+        width : 70%;
+        margin-top : 70%;
+    }
+}
+@media (max-width:450px) { 
+    .sheet {
+        width : 80%;
+		margin-top: 80%;
+    }
+}
+.sheet {
+	/* height:25%; */
+	min-width: 35%;
+
+}
+#date-picker-dialog-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+}

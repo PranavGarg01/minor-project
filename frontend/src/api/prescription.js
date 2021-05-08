@@ -35,3 +35,12 @@ export const createPrescription = async (formData) => {
 		throw err;
 	}
 };
+
+export const getUserDetails = async (uuid) => {
+	try {
+		const res = await API.get(`/prescription/user/${uuid}`);
+		return res.data;
+	} catch (err) {
+		throw err;
+	}
+};

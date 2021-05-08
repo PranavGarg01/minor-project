@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setAlert } from "../../../slices/alert";
 import { editProfile, getMyProfile } from "../../../slices/profile";
-import Image from "../img-9.png";
+import Image from "../../../assets/img/img-9.png";
 
 import Loader from "../../../components/layouts/Loading";
 import {

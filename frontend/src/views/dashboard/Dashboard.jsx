@@ -9,7 +9,7 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import PrescriptionCard from "../../components/layouts/Dashboard/PrescriptionCard";
 import { getMyPrescriptions } from "../../slices/prescription.js";
-
+import userPic from "../../assets/img/53571.jpg";
 const useStyles = makeStyles((theme) => ({
 	large: {
 		width: theme.spacing(18),
@@ -57,7 +57,7 @@ const Dashboard = () => {
 								<div class="profile-box">
 									<Avatar
 										alt="Insert the name initial here"
-										src="https://m.cricbuzz.com/a/img/v1/192x192/i1/c170661/virat-kohli.jpg"
+										src={userPic}
 										className={classes.large}
 									/>
 									<span class="profile-name">

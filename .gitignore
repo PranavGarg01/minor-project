@@ -3,3 +3,4 @@ backend/config/default.json
 .vscode
 debug.log
 *.abi
+*.pem
