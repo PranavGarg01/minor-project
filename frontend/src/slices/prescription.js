@@ -83,9 +83,20 @@ export const getUserDetails = (uuid) => async (dispatch) => {
 	try {
 		dispatch(setLoading());
 		const userDetails = await REQUESTS.getUserDetails(uuid);
+		// console.log(userDetails.user);
+		if(userDetails.data.user.user == null){
+			dispatch(setAlert("User Not Found", "error"));
+			dispatch(clearLoading());
+		}
+		else if (userDetails.data.user.profile ==null) {
+			dispatch(setAlert("Profile Not Found", "error"));
+			dispatch(clearLoading());
+		} else {
+		console.log("abc")
 		dispatch(setAlert("Found User", "success"));
 		dispatch(setMyPrescription(userDetails));
-		dispatch(clearLoading());
+		}
+		
 	} catch (err) {
 		dispatch(clearLoading());
 		console.log(err.response.data.error);

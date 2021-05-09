@@ -2,6 +2,9 @@
 	position: relative;
   width: 100%;
 }
+.paperGrid{
+    margin: 2rem auto;
+}
 .reader:after {
 	content: "";
 	display: block;
@@ -24,11 +27,17 @@
         width : 70%;
         margin-top : 70%;
     }
+    .paperGrid {
+        margin : 0;
+    }
 }
 @media (max-width:450px) { 
     .sheet {
         width : 80%;
 		margin-top: 80%;
+    }
+    .paperGrid {
+        margin : 0;
     }
 }
 .sheet {

@@ -22,6 +22,7 @@ import { clearLoading, setLoading } from "./slices/loading";
 const DoctorRoute = lazy(() => import("./components/routing/DoctorRoute"));
 const UserRoute = lazy(() => import("./components/routing/UserRoute"));
 const Home = lazy(() => import("./views/Home"));
+//User
 const Login = lazy(() => import("./views/Login"));
 const Register = lazy(() => import("./views/Register"));
 const Dashboard = lazy(() => import("./views/dashboard/Dashboard"));
@@ -32,6 +33,7 @@ const CreateProfile = lazy(() =>
 	import("./views/dashboard/profile/CreateProfile")
 );
 const EditProfile = lazy(() => import("./views/dashboard/profile/EditProfile"));
+const GenerateQR = lazy(() => import("./views/dashboard/GenerateQR"));
 
 //doctor
 const DoctorDashboard = lazy(() => import("./views/doctor/Dashboard.jsx"));
@@ -69,6 +71,7 @@ const App = () => {
 						</Route>
 						{/* private routes */}
 
+						{/* User */}
 						<PrivateRoute exact path={ROUTES.DASHBOARD}>
 							<UserRoute>
 								<Dashboard />
@@ -89,8 +92,13 @@ const App = () => {
 								<EditProfile />
 							</UserRoute>
 						</PrivateRoute>
+						<PrivateRoute exact path={ROUTES.GENERATE_QR}>
+							<UserRoute>
+								<GenerateQR />
+							</UserRoute>
+						</PrivateRoute>
 
-						{/* doctor  */}
+						{/* Doctor  */}
 						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
 							<DoctorRoute>
 								<DoctorDashboard />

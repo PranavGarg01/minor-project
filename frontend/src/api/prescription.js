@@ -39,8 +39,10 @@ export const createPrescription = async (formData) => {
 export const getUserDetails = async (uuid) => {
 	try {
 		const res = await API.get(`/prescription/user/${uuid}`);
+		console.log(res.data);
 		return res.data;
 	} catch (err) {
+		console.log("err")
 		throw err;
 	}
 };

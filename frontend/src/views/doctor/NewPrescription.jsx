@@ -145,7 +145,8 @@ const NewPrescription = (props) => {
 						spacing={2}
 						md={6}
 						sm={12}
-						style={{ margin: "2rem auto" }}
+						className="paperGrid"
+						// style={{ margin: "2rem auto" }}
 						justify='space-between'
 					>
 						<Paper

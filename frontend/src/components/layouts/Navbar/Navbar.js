@@ -31,7 +31,7 @@ const Navbar = () => {
 				{!auth.isAuthenticated
 					? MenuItems.map((item, index) => {
 							return (
-								<li key={index}>
+								<li key={index} className="lis">
 									<a className={item.cName} href={item.url}>
 										{item.title}
 									</a>
@@ -40,23 +40,27 @@ const Navbar = () => {
 					  })
 					: auth.user && auth.user.role == "doctor"
 					? DoctorLinks.map((item, index) => (
-							<li key={index}>
+							<li key={index} className="lis">
 								<a className={item.cName} href={item.url}>
 									{item.title}
 								</a>
 							</li>
 					  ))
 					: UserLinks.map((item, index) => (
-							<li key={index}>
+							<li key={index} className="lis">
 								<a className={item.cName} href={item.url}>
 									{item.title}
 								</a>
 							</li>
 					  ))}
+				<li className="btnli">
+					{auth.isAuthenticated && (
+						<Button onClick={() => dispatch(logout())}>
+							Logout
+						</Button>
+					)}
+				</li>
 			</ul>
-			{auth.isAuthenticated && (
-				<Button onClick={() => dispatch(logout())}>Logout</Button>
-			)}
 
 			{/* <Button>Sign Up</Button> */}
 		</nav>

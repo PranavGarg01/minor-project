@@ -1,4 +1,13 @@
-import { DASHBOARD, DOCTOR_DASHBOARD, DOCTOR_PROFILE, LOGIN, MYPROFILE, NEW_PRESCRIPTION, REGISTER } from "../../../constants/routes";
+import {
+	DASHBOARD,
+	DOCTOR_DASHBOARD,
+	DOCTOR_PROFILE,
+	GENERATE_QR,
+	LOGIN,
+	MYPROFILE,
+	NEW_PRESCRIPTION,
+	REGISTER,
+} from "../../../constants/routes";
 
 export const MenuItems = [
 	{
@@ -43,19 +52,9 @@ export const UserLinks = [
 	},
 	{
 		title: "Generate QR",
-		url: "#",
+		url: GENERATE_QR,
 		cName: "nav-links",
 	},
-	// {
-	// 	title: "Login",
-	// 	url: "/login",
-	// 	cName: "nav-links",
-	// },
-	// {
-	// 	title: "Register",
-	// 	url: "/register",
-	// 	cName: "nav-links",
-	// },
 ];
 
 export const DoctorLinks = [
@@ -74,14 +73,5 @@ export const DoctorLinks = [
 		url: NEW_PRESCRIPTION,
 		cName: "nav-links",
 	},
-	// {
-	// 	title: "Login",
-	// 	url: "/login",
-	// 	cName: "nav-links",
-	// },
-	// {
-	// 	title: "Register",
-	// 	url: "/register",
-	// 	cName: "nav-links",
-	// },
+	
 ];

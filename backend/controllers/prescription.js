@@ -61,14 +61,23 @@ exports.getUserDetails = asyncHandler(async (req, res, next) => {
 		uuid: req.params.uuid,
 	});
 	query.then(async function(user){
-		let profile = await Profile.findOne({ user: user[0]._id });
+		console.log(user.length)
+		if(user.length==0) {
+			user = null;
+			let profile = null;
+			res.status(200).json({
+				success: true,
+				data: {user : {user,profile}},
+			});
+		}else
+		{let profile = await Profile.findOne({ user: user[0]._id });
 		user = user[0];
 		// profile = profile[0];
 		console.log(typeof(user))
 		res.status(200).json({
 			success: true,
 			data: {user : {user,profile}},
-		});
+		});}
 	});
 	
 });
