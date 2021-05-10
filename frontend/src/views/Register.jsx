@@ -11,7 +11,6 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
 import {
-	AppBar,
 	colors,
 	Avatar,
 	CssBaseline,
@@ -95,13 +94,13 @@ const Register = () => {
 		name: "",
 		email: "",
 		password: "",
-		role: "",
+		role: "user",
 	});
 	const onChange = (e) => {
 		console.log(e.target.value);
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
-	const { name, email, password } = formData;
+	const { name, email, password, role } = formData;
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(registerUser(formData, history));
@@ -168,90 +167,100 @@ const Register = () => {
 		// 		<input type="submit" name="register" value="Register" />
 		// 	</form>
 		// </div>
-		<Container component="main" maxWidth="xs">
+		<Container component='main' maxWidth='xs'>
 			<CssBaseline />
 			<Paper elevation={3} className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h4">
+				<Typography component='h1' variant='h4'>
 					Register
 				</Typography>
-				<form className={classes.form} noValidate>
+				<form
+					className={classes.form}
+					noValidate
+					onSubmit={(e) => onSubmit(e)}
+				>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
+								variant='outlined'
 								required
 								fullWidth
-								id="name"
-								label="Name"
-								name="name"
-								autoComplete="name"
+								id='name'
+								label='Name'
+								name='name'
+								autoComplete='name'
+								value={name}
+								onChange={onChange}
 								className={classes.textField}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
+								variant='outlined'
 								required
 								fullWidth
-								id="email"
-								label="Email Address"
-								name="email"
-								autoComplete="email"
+								id='email'
+								label='Email Address'
+								name='email'
+								value={email}
+								onChange={onChange}
+								autoComplete='email'
 								className={classes.textField}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
+								variant='outlined'
 								required
 								fullWidth
-								name="password"
-								label="Password"
-								type="password"
-								id="password"
-								autoComplete="current-password"
+								name='password'
+								label='Password'
+								type='password'
+								id='password'
+								value={password}
+								onChange={onChange}
+								autoComplete='current-password'
 							/>
 						</Grid>
 					</Grid>
 
-					<FormControl component="fieldset">
+					<FormControl component='fieldset'>
 						<Typography
-							component="legend"
-							variant="h6"
+							component='legend'
+							variant='h6'
 							className={classes.signInText}
 						>
 							Register as:
 						</Typography>
 						<RadioGroup
-							aria-label="gender"
-							name="gender1"
-							value={value}
-							onChange={handleChange}
+							aria-label='role'
+							name='role'
+							value={role}
+							onChange={onChange}
 						>
 							<Grid container>
 								<Grid item xs={6}>
 									<FormControlLabel
-										value="user"
+										value='user'
 										control={<Radio />}
-										label="User"
+										label='User'
 									/>
 								</Grid>
 								<Grid item xs={6}>
 									<FormControlLabel
-										value="doctor"
+										value='doctor'
 										control={<Radio />}
-										label="Doctor"
+										label='Doctor'
 									/>
 								</Grid>
 							</Grid>
 						</RadioGroup>
 					</FormControl>
 					<Button
-						type="submit"
+						type='submit'
 						fullWidth
-						variant="contained"
-						color="primary"
+						variant='contained'
+						color='primary'
 						className={classes.submit}
 					>
 						Register

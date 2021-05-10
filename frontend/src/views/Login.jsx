@@ -5,21 +5,15 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../slices/auth";
 import {
-	AppBar,
 	colors,
 	Avatar,
 	CssBaseline,
-	ThemeProvider,
 	Typography,
 	Container,
 	createMuiTheme,
-	Box,
 	Grid,
 	makeStyles,
 	Button,
-	SvgIcon,
-	FormControlLabel,
-	Checkbox,
 	AutoComplete,
 	TextField,
 	Link,
@@ -99,82 +93,60 @@ const Login = (props) => {
 		}
 	}, [isAuthenticated]);
 	return (
-		// <div className='box'>
-		// 	<h1 align='center'>Login</h1>
-		// 	<form role='form' onSubmit={e=>onSubmit(e)}>
-		// 		<div className='inputBox'>
-		// 			<input
-		// 				type='text'
-		// 				name='email'
-		// 				value={email}
-		// 				onChange={onChange}
-		// 				autoComplete='off'
-		// 				required
-		// 			/>
-		// 			<label>Email</label>
-		// 		</div>
-		// 		<div className='inputBox'>
-		// 			<input
-		// 				type='password'
-		// 				name='password'
-		// 				value={password}
-		// 				onChange={onChange}
-		// 				autoComplete='off'
-		// 				required
-		// 			/>
-		// 			<label>Password</label>
-		// 		</div>
-
-		// 		<input type='submit' name='login' value='Login' />
-		// 	</form>
-		// </div>
-
-		<Container component="main" maxWidth="xs">
+		<Container component='main' maxWidth='xs'>
 			<CssBaseline />
 			<Paper elevation={3} className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h4">
+				<Typography component='h1' variant='h4'>
 					Login
 				</Typography>
-				<form className={classes.form} noValidate>
+				<form
+					className={classes.form}
+					noValidate
+					onSubmit={(e) => onSubmit(e)}
+				>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
+								variant='outlined'
 								required
 								fullWidth
-								id="email"
-								label="Email Address"
-								name="email"
-								autoComplete="email"
+								id='email'
+								label='Email Address'
+								name='email'
+								autoComplete='email'
+								value={email}
+								onChange={onChange}
 								className={classes.textField}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
+								variant='outlined'
 								required
 								fullWidth
-								name="password"
-								label="Password"
-								type="password"
-								id="password"
-								autoComplete="current-password"
+								name='password'
+								label='Password'
+								type='password'
+								id='password'
+								value={password}
+								onChange={onChange}
+								autoComplete='current-password'
 							/>
 						</Grid>
 					</Grid>
 					<Button
-						type="submit"
+						type='submit'
 						fullWidth
-						variant="contained"
-						color="primary"
+						variant='contained'
+						color='primary'
 						className={classes.submit}
 					>
 						Login
 					</Button>
-					<Grid container justify="flex-end">
+					<Grid container justify='flex-end'>
 						<Grid item>
-							<Link href={REGISTER} variant="body2">
+							<Link href={REGISTER} variant='body2'>
 								Don't have an account ? Sign Up
 							</Link>
 						</Grid>
