@@ -5,6 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import PrescriptionQR from "../Modal/PrescriptionQR";
 
 const useStyles = makeStyles({
 	root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
 
 const PrescriptionCard = (props) => {
 	const classes = useStyles();
-	const {examination,date, doctorName,doctorSpeciality} = props;
+	const {examination,date, doctorName,doctorSpeciality,id} = props;
 	var date2 = new Date(date);
 	var monthNames = [
 		"Jan", "Feb", "Mar",
@@ -43,6 +44,15 @@ const PrescriptionCard = (props) => {
    var d = date2.getDate();
    var m = monthNames[date2.getMonth()];
    var y = date2.getFullYear();
+   const [open2, setOpen2] = React.useState(false);
+
+	const handleOpen2 = () => {
+		setOpen2(true);
+	};
+
+	const handleClose2 = () => {
+		setOpen2(false);
+	};
 	return (
 		<div>
 			<Card elevation={4} className={classes.root}>
@@ -103,11 +113,16 @@ const PrescriptionCard = (props) => {
 							marginBottom: "2rem",
 							width: "88%",
 						}}
+						onClick={handleOpen2}
 					>
 						View More
 					</Button>
 				</CardActions>
 			</Card>
+			<PrescriptionQR  handleClose={handleClose2}
+				handleOpen={handleOpen2}
+				open={open2} 
+				prescriptionId={id}/>
 		</div>
 	);
 };

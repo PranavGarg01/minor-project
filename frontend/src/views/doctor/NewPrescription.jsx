@@ -8,6 +8,7 @@ import Image from "../../assets/img/img-9.png";
 import Icon from "@material-ui/core/Icon";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import QrReader from "react-qr-reader";
+import PropTypes from 'prop-types'
 import "./NewPrescription.css";
 import {
 	TextField,
@@ -18,7 +19,7 @@ import {
 	Box,
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import { getUserDetails } from "../../slices/prescription";
+import { getUserDetails, getUserPrescriptions, setMyPrescription, setPrescriptions } from "../../slices/prescription";
 import DateFnsUtils from "@date-io/date-fns";
 import {
 	MuiPickersUtilsProvider,
@@ -30,6 +31,8 @@ import { createPrescription } from "../../slices/prescription";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import MedicalHistoryModal from "../../components/layouts/Modal/MedicalHistoryModal";
+import PreviousPrescriptionModal from "../../components/layouts/Modal/PreviousPrescriptionModal";
 
 const useStyles = makeStyles((theme) => ({
 	disabledd: {
@@ -58,12 +61,15 @@ const NewPrescription = (props) => {
 		examination: "",
 		medicines: "",
 		followUp: new Date(2021, 4, 7),
+		medicalHistory: [],
+		deficiency: [],
 	});
 
-	const { prescription, loading, auth } = useSelector(
+	const { prescription, loading, auth,prescriptions } = useSelector(
 		(state) => ({
 			auth: state.auth,
-			prescription: state.prescription.prescription,
+			prescription: state.prescription.prescription,//all the user data (user,profile)
+			prescriptions: state.prescription.prescriptions,// user's previous prescriptions
 			loading: state.loading.loading,
 		}),
 		shallowEqual
@@ -78,6 +84,8 @@ const NewPrescription = (props) => {
 		examination,
 		medicines,
 		followUp,
+		deficiency,
+		medicalHistory,
 	} = data;
 	const onChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
@@ -92,11 +100,28 @@ const NewPrescription = (props) => {
 				weight: prescription.user.profile.weight,
 				gender: prescription.user.profile.gender,
 				bloodGroup: prescription.user.profile.bloodGroup,
+				medicalHistory: prescription.user.profile.medicalHistory,
+				deficiency: prescription.user.profile.deficiency,
 			});
 	}, [prescription]);
+	useEffect(() => {
+		if(gender!=="") dispatch(getUserPrescriptions(prescription.user.user._id));	
+	}, [gender]);
+	
 	const onSubmit = (e) => {
 		e.preventDefault();
 		console.log("ha");
+		if((name || gender || bloodGroup )== "") {
+			dispatch(
+				setAlert("Type or scan for the user's unique id", "error")
+			);
+			return;
+		} else if((medicines || examination) === "") {
+			dispatch(
+				setAlert("Please fill in the required data", "error")
+			);
+			return;
+		} 
 		const formData = {
 			doctor: auth.user._id,
 			user: prescription.user.user._id,
@@ -105,22 +130,37 @@ const NewPrescription = (props) => {
 			followUp,
 		};
 		dispatch(createPrescription(formData, history));
+		setData({
+			...data,
+			uuid: "",
+			name: "",
+			height: "",
+			weight: "",
+			gender: "",
+			bloodGroup: "",
+			examination: "",
+			medicines: "",
+			followUp: new Date(2021, 4, 7),
+			medicalHistory: [],
+			deficiency: [],
+		});
+		dispatch(setMyPrescription({data:null}));
+		dispatch(setPrescriptions({data:[]}));
 	};
 
 	// QR CODE
-	const [open, setOpen] = React.useState(false);
+	const [open1, setOpen1] = React.useState(false);
 
-	const handleOpen = () => {
-		setOpen(true);
+	const handleOpen1 = () => {
+		setOpen1(true);
 	};
-
-	const handleClose = () => {
-		setOpen(false);
+	const handleClose1 = () => {
+		setOpen1(false);
 	};
 	const onScan = (scan) => {
 		if (scan) {
 			console.log(scan);
-			handleClose();
+			handleClose1();
 			setData({ ...data, uuid: scan });
 			dispatch(getUserDetails(scan));
 		}
@@ -133,9 +173,31 @@ const NewPrescription = (props) => {
 	const handleDateChange = (date) => {
 		setData({ ...data, followUp: date });
 	};
+
+	//Medical History Modal
+	const [open2, setOpen2] = React.useState(false);
+
+	const handleOpen2 = () => {
+		setOpen2(true);
+	};
+
+	const handleClose2 = () => {
+		setOpen2(false);
+	};
+
+	//Previous Prescription Modal
+	const [open3, setOpen3] = React.useState(false);
+
+	const handleOpen3 = () => {
+		setOpen3(true);
+	};
+
+	const handleClose3 = () => {
+		setOpen3(false);
+	};
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
-			<form onSubmit={onSubmit}>
+			<form>
 				<Grid container justify='center' alignItems='center'>
 					<Grid
 						item
@@ -145,14 +207,15 @@ const NewPrescription = (props) => {
 						spacing={2}
 						md={6}
 						sm={12}
-						className="paperGrid"
-						// style={{ margin: "2rem auto" }}
+						className='paperGrid'
 						justify='space-between'
 					>
 						<Paper
 							elevation={3}
+							className='paperback'
 							style={{
-								padding: "5%",
+								// padding: "5%",
+								// paddingRight: " 3%",
 								width: "100%",
 								minWidth: "80%",
 								backgroundColor: "#CFEBFD",
@@ -161,7 +224,6 @@ const NewPrescription = (props) => {
 							}}
 						>
 							<Grid
-								xs
 								container
 								direction='column'
 								spacing={2}
@@ -239,15 +301,62 @@ const NewPrescription = (props) => {
 													width: "47%",
 													height: "95%",
 													float: "right",
-													fontWeight: "bold",
+													fontWeight: "500",
 													fontSize: "1rem",
 												}}
 												// startIcon={<Icon>search</Icon>}
-												onClick={handleOpen}
+												onClick={handleOpen1}
 											>
 												QR
 											</Button>
 										</Grid>
+									</Grid>
+								</Grid>
+								<Grid
+									item
+									container
+									xs={12}
+									spacing={2}
+									justify='space-between'
+									alignItems='center'
+									style={{
+										// paddingRight: "0",
+										margin: "1rem auto",
+									}}
+								>
+									<Grid item xs={12} sm={6}>
+										<Button
+											fullWidth
+											variant='contained'
+											color='secondary'
+											size='medium'
+											style={{
+												padding: "5%",
+											}}
+											onClick={handleOpen2}
+											// to disable button till profile data not received
+											disabled={gender == ""}
+										>
+											Medical History
+										</Button>
+									</Grid>
+									<Grid item xs={12} sm={6}>
+										<Button
+											fullWidth
+											variant='contained'
+											color='secondary'
+											size='medium'
+											style={{
+												padding: "5%",
+											}}
+											disabled={
+												gender == "" &&
+												prescriptions.length == 0
+											}
+											onClick={handleOpen3}
+										>
+											Previous Prescriptions
+										</Button>
 									</Grid>
 								</Grid>
 								<Grid item xs={12}>
@@ -292,9 +401,9 @@ const NewPrescription = (props) => {
 									container
 									xs={12}
 									justify='space-between'
-									fullWidth
+									// fullWidth
 									spacing={1}
-									style={{ paddingRight: "0" }}
+									// style={{ paddingRight: "0" }}
 								>
 									<Grid item xs={6}>
 										<TextField
@@ -353,7 +462,7 @@ const NewPrescription = (props) => {
 									justify='space-between'
 									fullWidth
 									spacing={1}
-									style={{ paddingRight: "0" }}
+									// style={{ paddingRight: "0" }}
 								>
 									<Grid item xs={6}>
 										<TextField
@@ -410,6 +519,7 @@ const NewPrescription = (props) => {
 										size='medium'
 										fullWidth
 										multiline
+										required
 										rows={3}
 										label={
 											<span
@@ -434,6 +544,7 @@ const NewPrescription = (props) => {
 										size='medium'
 										fullWidth
 										multiline
+										required
 										rows={3}
 										label={
 											<span
@@ -458,7 +569,7 @@ const NewPrescription = (props) => {
 									justify='space-between'
 									spacing={2}
 									xs={12}
-									style={{ paddingRight: "0" }}
+									// style={{ paddingRight: "0" }}
 								>
 									<Grid item xs={12} md={5}>
 										<KeyboardDatePicker
@@ -490,7 +601,7 @@ const NewPrescription = (props) => {
 												height: "100%",
 											}}
 											startIcon={<CloudUploadIcon />}
-											type='submit'
+											onClick={onSubmit}
 										>
 											Upload
 										</Button>
@@ -505,15 +616,15 @@ const NewPrescription = (props) => {
 				aria-labelledby='transition-modal-title'
 				aria-describedby='transition-modal-description'
 				className={classes.modal}
-				open={open}
-				onClose={handleClose}
+				open={open1}
+				onClose={handleClose1}
 				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
 				}}
 			>
-				<Fade in={open}>
+				<Fade in={open1}>
 					<div className='sheet'>
 						<QrReader
 							delay={300}
@@ -526,6 +637,19 @@ const NewPrescription = (props) => {
 					</div>
 				</Fade>
 			</Modal>
+			<MedicalHistoryModal
+				handleClose={handleClose2}
+				handleOpen={handleOpen2}
+				open={open2}
+				medicalHistory={medicalHistory}
+				deficiency={deficiency}
+			/>
+			<PreviousPrescriptionModal
+				handleClose={handleClose3}
+				handleOpen={handleOpen3}
+				open={open3}
+				prescriptions={prescriptions}
+			/>
 		</MuiPickersUtilsProvider>
 	);
 };

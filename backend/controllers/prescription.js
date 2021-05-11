@@ -1,5 +1,6 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
+const sendEmail = require("../utils/sendEmail");
 const Prescription = require("../models/Prescription");
 const User = require("../models/User.js");
 const Profile = require("../models/Profile.js");
@@ -47,10 +48,16 @@ exports.getMyPrescriptions = asyncHandler(async (req, res, next) => {
 //@access private
 exports.createPrescription = asyncHandler(async (req, res, next) => {
 	req.body.doctor = req.user.id;
-
+	const user = await User.findOne({_id : req.body.user});
+	const doctor = await User.findOne({_id : req.body.doctor});
 	await Prescription.create(req.body);
-
+	
 	res.status(200).json({ success: true, data: {response : "Rx created"} });
+	await sendEmail({
+		email : user.email,
+		subject: `Thanks for visiting Dr. ${doctor.name}`,
+		message: `Dear ${user.name},\n\nDr. ${doctor.name} has uploaded a new prescription for you. You can access it from your dashboard.`,
+	});
 });
 
 //@desc   get user detials

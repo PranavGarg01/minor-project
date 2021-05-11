@@ -1,18 +1,21 @@
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const config = require("config");
+const oauthClientId = config.get("oauthClientId");
+const oauthClientSecret = config.get("oauthClientSecret");
+const oauthRefreshToken = config.get("oauthRefreshToken");
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(
-  process.env.OAUTH_CLIENT_ID,
-  process.env.OAUTH_CLIENT_SECRET,
+  oauthClientId,
+  oauthClientSecret,
   "https://developers.google.com/oauthplayground" // Redirect URL
 );
 
 oauth2Client.setCredentials({
-  refresh_token: process.env.OAUTH_REFRESH_TOKEN,
+  refresh_token: oauthRefreshToken,
 });
 
 const accessToken = oauth2Client.getAccessToken();
-
 const sendEmail = async (options) => {
   // create reusable transporter object using the default SMTP transport
 
@@ -21,17 +24,16 @@ const sendEmail = async (options) => {
     auth: {
       type: "OAuth2",
       //   user: process.env.SMTP_EMAIL,
-      user: "s.akshitsuri@gmail.com",
-      clientId: process.env.OAUTH_CLIENT_ID,
-
-      clientSecret: process.env.OAUTH_CLIENT_SECRET,
-      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+      user: "pannugarg22@gmail.com",
+      clientId: oauthClientId,
+      clientSecret: oauthClientSecret,
+      refreshToken: oauthRefreshToken,
       accessToken: accessToken,
     },
   });
 
   const message = {
-    from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
+    from: `Pranav Garg pannugarg22@gmail.com`,
     to: options.email,
     subject: options.subject,
     text: options.message,

@@ -3,26 +3,23 @@ import {
 	DOCTOR_DASHBOARD,
 	DOCTOR_PROFILE,
 	GENERATE_QR,
+	HOME,
 	LOGIN,
 	MYPROFILE,
 	NEW_PRESCRIPTION,
 	REGISTER,
+	CHEMIST
 } from "../../../constants/routes";
 
 export const MenuItems = [
 	{
 		title: "Home",
-		url: "/",
+		url: HOME,
 		cName: "nav-links",
 	},
 	{
-		title: "Services",
-		url: "#",
-		cName: "nav-links",
-	},
-	{
-		title: "Sign Up",
-		url: REGISTER,
+		title: "Chemist",
+		url: CHEMIST,
 		cName: "nav-links",
 	},
 	{
@@ -32,7 +29,7 @@ export const MenuItems = [
 	},
 	{
 		title: "Sign up",
-		url: "/register",
+		url: REGISTER,
 		cName: "nav-links",
 	},
 ];

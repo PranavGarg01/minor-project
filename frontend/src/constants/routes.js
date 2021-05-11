@@ -5,6 +5,7 @@ export const REGISTER = "/register";
 export const ABOUT = "/about";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const RESET_PASSWORD = "/reset-password/:token";
+export const CHEMIST = "/chemist";
 
 //private
 
