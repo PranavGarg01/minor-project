@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
 const { customAlphabet } = require('nanoid');
-
+const sendEmail = require("../utils/sendEmail");
 // @desc      Register user
 // @route     POST /api/auth/register
 // @access    Public
@@ -21,6 +21,12 @@ exports.register = asyncHandler(async (req, res, next) => {
 		role,
 	});
 	await sendTokenResponse(user, 200, res);
+	await sendEmail({
+		email,
+		subject: "Registered Successfully on ...",
+		message: `Hi, ${req.body.name} your registration has been successful. You may go ahead and complete your profile as the link below. \n https://localhost:3000/dashboard/my-profile`,
+	});
+	
 });
 
 // @desc      Login user

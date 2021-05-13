@@ -5,10 +5,20 @@
 .paperGrid{
     margin: 2rem auto;
 }
+.MuiGrid-spacing-xs-1 {
+    margin : 0
+}
+.paperback {
+    padding: 5%;
+    padding-right: 3%;
+}
 .reader:after {
 	content: "";
 	display: block;
 	padding-bottom: 100%;
+}
+.reader > section > div {
+    border-width: 25px !important;
   }
   @media (min-width:900px) { 
     .sheet {
@@ -38,6 +48,9 @@
     }
     .paperGrid {
         margin : 0;
+    }
+    .paperback{
+        padding-right: 5%;
     }
 }
 .sheet {

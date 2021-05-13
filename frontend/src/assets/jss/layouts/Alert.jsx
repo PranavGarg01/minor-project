@@ -1,8 +1,6 @@
 const AlertStyles = (theme) => ({
   root: {
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
+    marginTop: "1rem",
   },
 });
 

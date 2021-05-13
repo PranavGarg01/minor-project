@@ -107,7 +107,7 @@ const Dashboard = () => {
 					<div>
 						<Grid container>
 							{prescriptions.length != 0 && prescriptions.map((i)=> <Grid item xs={12} md={4}>
-								<PrescriptionCard date={i.date} examination={i.examination} doctorName={i.doctor.name}/>
+								<PrescriptionCard date={i.date} examination={i.examination} doctorName={i.doctor.name} id={i._id}/>
 							</Grid>)}
 							
 							<Grid item xs={12} md={4}>

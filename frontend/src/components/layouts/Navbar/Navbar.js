@@ -55,7 +55,7 @@ const Navbar = () => {
 					  ))}
 				<li className="btnli">
 					{auth.isAuthenticated && (
-						<Button onClick={() => dispatch(logout())}>
+						<Button onClick={() => {dispatch(logout());setToggle(!toggle)}}>
 							Logout
 						</Button>
 					)}

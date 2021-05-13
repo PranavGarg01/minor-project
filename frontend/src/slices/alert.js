@@ -27,5 +27,5 @@ export const setAlert = (msg, alertType) => async (dispatch) => {
 
   setTimeout(() => {
     dispatch(removeAlertReducer(id));
-  }, 3000);
+  }, 2000);
 };
