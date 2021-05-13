@@ -16,6 +16,9 @@
 	content: "";
 	display: block;
 	padding-bottom: 100%;
+}
+.reader > section > div {
+    border-width: 25px !important;
   }
   @media (min-width:900px) { 
     .sheet {

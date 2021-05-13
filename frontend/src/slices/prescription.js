@@ -41,7 +41,18 @@ export const getMyPrescriptions = () => async (dispatch) => {
 		console.log(err.response.data.error);
 	}
 };
-
+export const getPrescriptionById = (id) => async (dispatch) => {
+	try {
+		dispatch(setLoading());
+		const prescription = await REQUESTS.getPrescriptionById(id);
+		dispatch(setMyPrescription(prescription));
+		dispatch(clearLoading());
+	} catch (err) {
+		dispatch(clearLoading());
+		dispatch(setAlert("This QR code is invalid","error"));
+		console.log(err.response.data.error);
+	}
+}
 export const getUserPrescriptions = (id) => async (dispatch) => {
 	try {
 		dispatch(setLoading());

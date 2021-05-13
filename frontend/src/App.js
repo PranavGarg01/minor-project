@@ -18,6 +18,7 @@ import { loadUser } from "./slices/auth";
 //css
 import "./App.css";
 import { clearLoading, setLoading } from "./slices/loading";
+import Chemist from "./views/chemist/Chemist";
 //components
 const DoctorRoute = lazy(() => import("./components/routing/DoctorRoute"));
 const UserRoute = lazy(() => import("./components/routing/UserRoute"));
@@ -62,6 +63,9 @@ const App = () => {
 					<Switch>
 						<Route exact path={ROUTES.HOME}>
 							<Home />
+						</Route>
+						<Route exact path={ROUTES.CHEMIST}>
+							<Chemist />
 						</Route>
 						<Route exact path={ROUTES.LOGIN}>
 							<Login />

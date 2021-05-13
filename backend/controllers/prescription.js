@@ -19,6 +19,19 @@ exports.getDoctorPrescriptions = asyncHandler(async (req, res, next) => {
 	});
 });
 
+// //@desc get the prescription by prescriptionId
+// //@route  GET /api/prescription/chemist/:id
+// //@access private
+exports.getPrescriptionById = asyncHandler(async (req, res, next) => {
+	const prescription = await Prescription.findOne({
+		_id: req.params.id,
+	}).populate("doctor").populate("user");
+	res.status(200).json({
+		success: true,
+		data: prescription,
+	});
+});
+
 //@desc get all prescriptions by user
 //@route  GET /api/prescription/:userId
 //@access private

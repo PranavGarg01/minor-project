@@ -8,7 +8,14 @@ export const getUserPrescriptions = async (id) => {
 		throw err;
 	}
 };
-
+export const getPrescriptionById = async (id) => {
+	try {
+		const res = await API.get(`/prescription/chemist/${id}`);
+		return res.data;
+	} catch (err) {
+		throw err;
+	}
+}
 export const getMyPrescriptions = async () => {
 	try {
 		const res = await API.get("/prescription/me");
