@@ -33,28 +33,51 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Schedule = () => {
+const Schedule = ({date, doctorName, specialization, phoneNumber,examine}) => {
 	const classes = useStyles();
-
+	//DATE Calculation 
+	const extractDate = (date) => {
+		var date2 = new Date(date);
+		var monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+		var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+		var d = date2.getDate();
+		var m = monthNames[date2.getMonth()];
+		var y = date2.getFullYear();
+		var day = days[date2.getDay()]
+		return [d, m, y,day];
+	};
 	return (
 		<div className={classes.schedule}>
 			<Grid container>
 				<Grid item xs={4} md={2}>
 					<div className={classes.date}>
-						<div className={classes.dateIn}>12</div>
-						<div className={classes.month}>MAR</div>
+						<div className={classes.dateIn}>{extractDate(date)[0]}</div>
+						<div className={classes.month}>{extractDate(date)[1]}</div>
 					</div>
 				</Grid>
 				<Grid item xs={8} md={9}>
 					<div>
 						<Typography style={{ fontSize: "1.1rem" }}>
-							<b>Consultation</b>
+							<b>{doctorName}</b>
 						</Typography>
 					</div>
 					<div style={{ marginTop: "1.7rem", fontSize: "1rem" }}>
-						<span>Sunday </span>
+						<span>{phoneNumber} </span>
 						<span style={{ float: "right", marginRight: "0.7rem" }}>
-							9am - 11am
+						{extractDate(date)[3]}
 						</span>
 					</div>
 				</Grid>

@@ -4,7 +4,7 @@ const sendEmail = require("../utils/sendEmail");
 const Prescription = require("../models/Prescription");
 const User = require("../models/User.js");
 const Profile = require("../models/Profile.js");
-
+const DocProfile = require("../models/DocProfile");
 // //@desc get all prescriptions issued by the doctor
 // //@route  GET /api/prescription/doctor
 // //@access private
@@ -23,12 +23,24 @@ exports.getDoctorPrescriptions = asyncHandler(async (req, res, next) => {
 // //@route  GET /api/prescription/chemist/:id
 // //@access private
 exports.getPrescriptionById = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.findOne({
+	await Prescription.findOne({
 		_id: req.params.id,
-	}).populate("doctor").populate("user");
-	res.status(200).json({
-		success: true,
-		data: prescription,
+	}).populate("doctor").populate("user").lean().exec((err,prescription)=>{
+		let press = [];
+		prescription.forEach(async(x,i)=>{
+			const userProfile = await Profile.findOne({user:x.user._id});
+			const docProfile = await DocProfile.findOne({user : x.doctor._id});
+			press.push(prescription[i]);
+			press[i].doctor.profile = docProfile;
+			press[i].profile = userProfile;
+			if(i == prescription.length-1) {
+				res.status(200).json({
+					success: true,
+					data: prescription,
+				});
+			}
+		});
+		
 	});
 });
 
@@ -36,13 +48,26 @@ exports.getPrescriptionById = asyncHandler(async (req, res, next) => {
 //@route  GET /api/prescription/:userId
 //@access private
 exports.getUserPrescriptions = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.find({
+	await Prescription.find({
 		user: req.params.userId,
-	}).populate("doctor");
-	res.status(200).json({
-		success: true,
-		count: prescription.length,
-		data: prescription,
+	}).populate("doctor").lean().exec((err,prescription)=>{
+		let press = [];
+		prescription.forEach(async(x,i)=>{
+			const userProfile = await Profile.findOne({user:req.params.userId});
+			const docProfile = await DocProfile.findOne({user : x.doctor._id});
+			prescription[i].doctor.profile = docProfile;
+			prescription[i].profile = userProfile;
+			await press.push(prescription[i]);
+			if(i == prescription.length-1) {
+				res.status(200).json({
+					success: true,
+					count: prescription.length,
+					data: prescription,
+				});
+			}
+			
+		});
+		
 	});
 });
 
@@ -50,10 +75,24 @@ exports.getUserPrescriptions = asyncHandler(async (req, res, next) => {
 //@route  GET /api/prescription/me
 //@access private
 exports.getMyPrescriptions = asyncHandler(async (req, res, next) => {
-	const prescription = await Prescription.find({
+	await Prescription.find({
 		user: req.user.id,
-	}).populate("doctor");
-	res.status(200).json({ success: true, data: prescription });
+	}).populate("doctor").lean().exec((err,prescription)=>{
+		let press = [];
+		prescription.forEach(async(x,i)=>{
+			const userProfile = await Profile.findOne({user:req.user.id});
+			const docProfile = await DocProfile.findOne({user : x.doctor._id});
+			
+			prescription[i].doctor.profile = docProfile;
+			prescription[i].profile = userProfile;
+			await press.push(prescription[i]);
+			if(i == prescription.length-1) {
+				res.status(200).json({ success: true, data: prescription });
+			}
+		});
+		
+	});
+	
 });
 
 //@desc   create Rx

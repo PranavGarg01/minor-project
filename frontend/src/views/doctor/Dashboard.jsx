@@ -106,7 +106,7 @@ const Dashboard = () => {
 				<Grid container>
 					<Grid item xs={12} md={4}>
 						<div style={{ width: "92%", margin: "0 auto" }}>
-							<Grid conatiner>
+							<Grid container>
 								<Grid item xs={12}>
 									<Grid
 										container
