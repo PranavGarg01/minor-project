@@ -7,8 +7,8 @@ import { getMyDocProfile } from "../../slices/profile";
 const useStyles = makeStyles((theme) => ({
 	paper: {
 		width: "90%",
-
 		margin: "2rem auto",
+		overflowX: "hidden",
 	},
 	blueStrip: {
 		backgroundColor: "#4361ee",
@@ -56,17 +56,17 @@ const Prescription = () => {
 						<Grid container>
 							<Grid item xs={9}>
 								<Typography
-									variant="h5"
+									variant='h5'
 									gutterBottom
 									style={{}}
 								>
 									Dr. Doctor Blahh
 								</Typography>
-								<Typography variant="h7" style={{}}>
+								<Typography variant='h7' style={{}}>
 									Heart specialist
 								</Typography>
 								<Typography
-									variant="h6"
+									variant='h6'
 									style={{
 										fontSize: "1.1rem",
 										marginBottom: "0.3rem",
@@ -132,14 +132,14 @@ const Prescription = () => {
 				</div>
 				<hr className={classes.hr}></hr>
 				<br></br>
-				<Typography style={{ marginLeft: "8%" }} variant="h7">
+				<Typography style={{ marginLeft: "8%" }} variant='h7'>
 					<b>Dated: </b>
 					<span>12-03-21</span>
 				</Typography>
 				<br></br>
 				<br></br>
 				<div>
-					<Typography style={{ marginLeft: "8%" }} variant="h6">
+					<Typography style={{ marginLeft: "8%" }} variant='h6'>
 						<b>Examination</b>
 					</Typography>
 					<div className={classes.exam}>
@@ -149,14 +149,14 @@ const Prescription = () => {
 						</Typography>
 					</div>
 					<div className={classes.pres}>
-						<Typography style={{ marginLeft: "8%" }} variant="h6">
+						<Typography style={{ marginLeft: "8%" }} variant='h6'>
 							<b>Prescriptions</b>
 						</Typography>
 
 						{/* Map medicines in this component */}
 						<Typography>
 							<i
-								class="fas fa-pills"
+								class='fas fa-pills'
 								style={{
 									fontSize: "1.6rem",
 									color: "#045de9",
@@ -173,7 +173,7 @@ const Prescription = () => {
 
 						<Typography>
 							<i
-								class="fas fa-pills"
+								class='fas fa-pills'
 								style={{
 									fontSize: "1.6rem",
 									color: "#045de9",
@@ -190,7 +190,7 @@ const Prescription = () => {
 
 						<Typography>
 							<i
-								class="fas fa-pills"
+								class='fas fa-pills'
 								style={{
 									fontSize: "1.6rem",
 									color: "#045de9",
@@ -207,7 +207,7 @@ const Prescription = () => {
 					</div>
 					<br></br>
 					<br></br>
-					<Typography style={{ marginLeft: "8%" }} variant="h7">
+					<Typography style={{ marginLeft: "8%" }} variant='h7'>
 						<b>Follow Up Date: </b>
 						<span> 15-03-21</span>
 					</Typography>
