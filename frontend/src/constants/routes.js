@@ -15,7 +15,7 @@ export const MYPROFILE = `${DASHBOARD}/my-profile`;
 export const CREATEPROFILE = `${DASHBOARD}/create-profile`;
 export const UPDATEPROFILE = `${DASHBOARD}/update-profile`;
 export const GENERATE_QR = `${DASHBOARD}/generate-qr`;
-
+export const PRESCRIPTION = '/prescription';
 
 //doctor
 export const DOCTOR_DASHBOARD = "/doctor-dashboard";

@@ -35,12 +35,20 @@ const CreateProfile = lazy(() =>
 );
 const EditProfile = lazy(() => import("./views/dashboard/profile/EditProfile"));
 const GenerateQR = lazy(() => import("./views/dashboard/GenerateQR"));
+const Prescription = lazy(() => import("./views/dashboard/Prescription.jsx"));
 
 //doctor
 const DoctorDashboard = lazy(() => import("./views/doctor/Dashboard.jsx"));
-const NewPrescription = lazy(() => import("./views/doctor/NewPrescription.jsx"));
-const DoctorProfile = lazy(() => import("./views/doctor/docProfile/DisplayProfile"));
-const DoctorUpdateProfile = lazy(() => import("./views/doctor/docProfile/EditProfile"));
+const NewPrescription = lazy(() =>
+	import("./views/doctor/NewPrescription.jsx")
+);
+const DoctorProfile = lazy(() =>
+	import("./views/doctor/docProfile/DisplayProfile")
+);
+const DoctorUpdateProfile = lazy(() =>
+	import("./views/doctor/docProfile/EditProfile")
+);
+
 const App = () => {
 	useEffect(() => {
 		const loadMe = async () => {
@@ -101,7 +109,11 @@ const App = () => {
 								<GenerateQR />
 							</UserRoute>
 						</PrivateRoute>
-
+						<PrivateRoute exact path={ROUTES.PRESCRIPTION}>
+							<UserRoute>
+								<Prescription />
+							</UserRoute>
+						</PrivateRoute>
 						{/* Doctor  */}
 						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
 							<DoctorRoute>
@@ -124,7 +136,7 @@ const App = () => {
 							</DoctorRoute>
 						</PrivateRoute>
 						{/* 404 not found */}
-						<Route exact path='*'>
+						<Route exact path="*">
 							<NotFound />
 						</Route>
 					</Switch>
