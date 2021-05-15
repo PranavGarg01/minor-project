@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { getPrescriptionById } from "../../slices/prescription";
+import { useHistory } from "react-router";
 const Chemist = () => {
 	const { prescription, loading } = useSelector(
 		(state) => ({
@@ -22,11 +23,13 @@ const Chemist = () => {
 	);
 	const [scanned, setScanned] = useState(false);
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const onScan = (scan) => {
 		if (scan) {
 			console.log(scan);
 			dispatch(getPrescriptionById(scan));
 			setScanned(true);
+			history.push(`/prescription/${scan}`);
 		}
 	};
 	const handleError = (err) => {

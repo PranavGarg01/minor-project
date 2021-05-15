@@ -49,7 +49,7 @@ export const getPrescriptionById = (id) => async (dispatch) => {
 		dispatch(clearLoading());
 	} catch (err) {
 		dispatch(clearLoading());
-		dispatch(setAlert("This QR code is invalid","error"));
+		dispatch(setAlert("This Prescription is invaled","error"));
 		console.log(err.response.data.error);
 	}
 }

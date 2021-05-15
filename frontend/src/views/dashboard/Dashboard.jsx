@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import { Button, Paper, Avatar, Grid, Typography } from "@material-ui/core";
-import { MUItheme } from "../../theme.js";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./Dashboard.css";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import Loading from "../../components/layouts/Loading";
 import { DOCTOR_DASHBOARD } from "../../constants/routes";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
@@ -84,11 +82,14 @@ const Dashboard = () => {
 	);
 	const [openList, setOpenList] = React.useState({});
 	const classes = useStyles();
+	const history = useHistory();
 	const handleClick = (e, index) => {
 		console.log(index);
 		setOpenList((openList) => ({ ...openList, [index]: !openList[index] }));
 	};
-
+	const handleViewMore = (id) => {
+		history.push(`/prescription/${id}`);
+	};
 	//DATE Calculation
 	const extractDate = (date) => {
 		var date2 = new Date(date);
@@ -112,14 +113,14 @@ const Dashboard = () => {
 		return [d, m, y];
 	};
 	//QR Code Modal
-	const [open2, setOpen2] = React.useState(false);
+	const [open2, setOpen2] = React.useState({});
 
-	const handleOpen2 = () => {
-		setOpen2(true);
+	const handleOpen2 = (e, index) => {
+		setOpen2((open2) => ({ ...open2, [index]: true }));
 	};
 
-	const handleClose2 = () => {
-		setOpen2(false);
+	const handleClose2 = (e, index) => {
+		setOpen2((open2) => ({ ...open2, [index]: false }));
 	};
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -129,16 +130,16 @@ const Dashboard = () => {
 	//Upcoming Visits Calculator
 	const [visits, setVisits] = React.useState([]);
 	useEffect(() => {
-		// console.log(prescriptions.length !== 0)
 		if (prescriptions.length !== 0) {
+			setVisits([]);
 			prescriptions.map((rx, i) => {
 				const followUp = new Date(rx.followUp);
 				const today = new Date();
 				if (followUp >= today) {
-					setVisits(visits=> [...visits, rx]);
+					setVisits((visits) => [...visits, rx]);
 				}
 			});
-		}		
+		}
 	}, [prescriptions]);
 	return (
 		<div>
@@ -240,7 +241,8 @@ const Dashboard = () => {
 											date={visit.followUp}
 											doctorName={visit.doctor.name}
 											specialization={
-												visit.doctor.profile.specialization
+												visit.doctor.profile
+													.specialization
 											}
 											phoneNumber={
 												visit.doctor.profile.phoneNumber
@@ -388,6 +390,11 @@ const Dashboard = () => {
 														className={
 															classes.listBtn
 														}
+														onClick={() =>
+															handleViewMore(
+																rx._id
+															)
+														}
 													>
 														View
 													</Button>
@@ -402,7 +409,12 @@ const Dashboard = () => {
 												>
 													<Button
 														variant='outlined'
-														onClick={handleOpen2}
+														onClick={(e) =>
+															handleOpen2(
+																e,
+																index
+															)
+														}
 														className={
 															classes.listBtn
 														}
@@ -412,13 +424,14 @@ const Dashboard = () => {
 												</Grid>
 											</Grid>
 										</Grid>
+										<PrescriptionQR
+											handleClose={handleClose2}
+											// handleOpen={handleOpen2}
+											index={index}
+											open={open2[index] || false}
+											prescriptionId={rx._id}
+										/>
 									</AccordionDetails>
-									<PrescriptionQR
-										handleClose={handleClose2}
-										handleOpen={handleOpen2}
-										open={open2}
-										prescriptionId={rx._id}
-									/>
 								</Accordion>
 							))}
 						</div>

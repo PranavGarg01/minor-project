@@ -81,6 +81,9 @@ const App = () => {
 						<Route exact path={ROUTES.REGISTER}>
 							<Register />
 						</Route>
+						<Route exact path={ROUTES.PRESCRIPTION}>
+							<Prescription />
+						</Route>
 						{/* private routes */}
 
 						{/* User */}
@@ -109,11 +112,7 @@ const App = () => {
 								<GenerateQR />
 							</UserRoute>
 						</PrivateRoute>
-						<PrivateRoute exact path={ROUTES.PRESCRIPTION}>
-							<UserRoute>
-								<Prescription />
-							</UserRoute>
-						</PrivateRoute>
+
 						{/* Doctor  */}
 						<PrivateRoute exact path={ROUTES.DOCTOR_DASHBOARD}>
 							<DoctorRoute>
@@ -136,7 +135,7 @@ const App = () => {
 							</DoctorRoute>
 						</PrivateRoute>
 						{/* 404 not found */}
-						<Route exact path="*">
+						<Route exact path='*'>
 							<NotFound />
 						</Route>
 					</Switch>

@@ -26,17 +26,17 @@ exports.getPrescriptionById = asyncHandler(async (req, res, next) => {
 	await Prescription.findOne({
 		_id: req.params.id,
 	}).populate("doctor").populate("user").lean().exec((err,prescription)=>{
-		let press = [];
+		prescription = [prescription];
 		prescription.forEach(async(x,i)=>{
 			const userProfile = await Profile.findOne({user:x.user._id});
 			const docProfile = await DocProfile.findOne({user : x.doctor._id});
-			press.push(prescription[i]);
-			press[i].doctor.profile = docProfile;
-			press[i].profile = userProfile;
+			prescription[i].doctor.profile = docProfile;
+			prescription[i].profile = userProfile;
+			// await press.push(prescription[i]);
 			if(i == prescription.length-1) {
 				res.status(200).json({
 					success: true,
-					data: prescription,
+					data: prescription[0],
 				});
 			}
 		});

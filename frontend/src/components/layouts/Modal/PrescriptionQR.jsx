@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Component
-const PrescriptionQR = ({ handleClose, handleOpen, open,prescriptionId }) => {
+const PrescriptionQR = ({ handleClose, open,prescriptionId,index }) => {
 	const classes = useStyles();
 	return (
 		<Modal
@@ -36,7 +36,7 @@ const PrescriptionQR = ({ handleClose, handleOpen, open,prescriptionId }) => {
 			aria-describedby='transition-modal-description'
 			className='qrView'
 			open={open}
-			onClose={handleClose}
+			onClose={(e)=>handleClose(e,index)}
 			closeAfterTransition
 			BackdropComponent={Backdrop}
 			BackdropProps={{
@@ -75,7 +75,7 @@ const PrescriptionQR = ({ handleClose, handleOpen, open,prescriptionId }) => {
 								<IconButton
 									aria-label='close'
 									className='closeBtn'
-									onClick={handleClose}
+									onClick={(e)=>handleClose(e,index)}
 								>
 									<CloseIcon />
 								</IconButton>
