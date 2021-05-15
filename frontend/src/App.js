@@ -38,9 +38,19 @@ const GenerateQR = lazy(() => import("./views/dashboard/GenerateQR"));
 
 //doctor
 const DoctorDashboard = lazy(() => import("./views/doctor/Dashboard.jsx"));
-const NewPrescription = lazy(() => import("./views/doctor/NewPrescription.jsx"));
-const DoctorProfile = lazy(() => import("./views/doctor/docProfile/DisplayProfile"));
-const DoctorUpdateProfile = lazy(() => import("./views/doctor/docProfile/EditProfile"));
+const NewPrescription = lazy(() =>
+	import("./views/doctor/NewPrescription.jsx")
+);
+const DoctorProfile = lazy(() =>
+	import("./views/doctor/docProfile/DisplayProfile")
+);
+const DoctorUpdateProfile = lazy(() =>
+	import("./views/doctor/docProfile/EditProfile")
+);
+
+//test route
+const Pres = lazy(() => import("./views/dashboard/Prescription.jsx"));
+
 const App = () => {
 	useEffect(() => {
 		const loadMe = async () => {
@@ -123,8 +133,14 @@ const App = () => {
 								<NewPrescription />
 							</DoctorRoute>
 						</PrivateRoute>
+						{/* Test route */}
+						<PrivateRoute exact path="/pres">
+							<UserRoute>
+								<Pres />
+							</UserRoute>
+						</PrivateRoute>
 						{/* 404 not found */}
-						<Route exact path='*'>
+						<Route exact path="*">
 							<NotFound />
 						</Route>
 					</Switch>
