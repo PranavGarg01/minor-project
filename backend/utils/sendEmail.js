@@ -24,7 +24,7 @@ const sendEmail = async (options) => {
     auth: {
       type: "OAuth2",
       //   user: process.env.SMTP_EMAIL,
-      user: "pannugarg22@gmail.com",
+      user: "pranavgarg065@gmail.com",
       clientId: oauthClientId,
       clientSecret: oauthClientSecret,
       refreshToken: oauthRefreshToken,
@@ -33,7 +33,7 @@ const sendEmail = async (options) => {
   });
 
   const message = {
-    from: `Pranav Garg pannugarg22@gmail.com`,
+    from: `Pranav Garg pranavgarg065@gmail.com`,
     to: options.email,
     subject: options.subject,
     text: options.message,
