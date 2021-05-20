@@ -1,61 +1,8 @@
-.paperGrid{
-    margin: 2rem auto !important;
-}
 .reader {
 	position: relative;
-  width: 100%;
+	width: 100%;
 }
-/* .reader:after {
-	content: "";
-	display: block;
-	padding-bottom: 100%;
-  } */
-  .paperback {
-    padding: 5%;
-    padding-right: 3%;
-}
-.sheet {
-	/* height:25%; */
-	min-width: 35%;
-  margin : 0 auto
-}
+
 .reader > section > div {
-  border-width: 25px !important;
-}
-@media (min-width:900px) { 
-  .sheet {
-      width : 50%;
-      /* margin-top : 35%; */
-  }
-}
-@media (max-width:900px) { 
-  .sheet {
-      width : 50%;
-      /* margin-top : 50%; */
-  }
-}
-@media (max-width:768px){ 
-  .sheet {
-      width : 70%;
-      /* margin-top : 70%; */
-  }
-  .paperGrid {
-      margin : 0 !important;
-  }
-}
-@media (max-width:450px) { 
-  .sheet {
-      width : 80%;
-  /* margin-top: 80%; */
-  }
-  .paperGrid {
-      margin : 0 !important;
-  }
-  .paperback{
-      padding-right: 5%;
-  }
-  .paperback{
-    min-height: 100%;
-    height:90vh
-  }
+	border-width: 25px !important;
 }
