@@ -165,12 +165,16 @@ const Dashboard = () => {
 								<Grid
 									item
 									xs={12}
-									style={{ margin: "0 auto", width: "88%" }}
+									style={{
+										margin: "0 auto",
+										width: "88%",
+										paddingLeft: "7%",
+									}}
 								>
 									<Typography
-										variant='h4'
+										variant="h5"
 										gutterBottom
-										style={{}}
+										style={{ fontSize: "1.66rem" }}
 									>
 										<b>Dr. {auth.user.name}</b>
 									</Typography>
@@ -182,9 +186,9 @@ const Dashboard = () => {
 										<b>Heart specialist</b>
 									</Typography>
 									<Typography
-										variant='h6'
-										color='textSecondary'
-										style={{}}
+										variant="h6"
+										color="textSecondary"
+										style={{ fontSize: "1.2rem" }}
 									>
 										Manipal Hospital
 									</Typography>
