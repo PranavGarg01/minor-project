@@ -200,6 +200,8 @@ const Prescription = ({}) => {
 							</Typography>
 
 							{/* Map medicines in this component */}
+							{
+								prescription.medicines.split(" ").map(m=>
 							<Typography>
 								<i
 									class='fas fa-pills'
@@ -216,49 +218,11 @@ const Prescription = ({}) => {
 										marginLeft: "3%",
 									}}
 								>
-									Crocin
+									{m}
 								</span>
 							</Typography>
-
-							<Typography>
-								<i
-									class='fas fa-pills'
-									style={{
-										fontSize: "1.6rem",
-										color: "#045de9",
-										marginLeft: "8%",
-										marginTop: "1rem",
-									}}
-								></i>{" "}
-								<span
-									style={{
-										fontSize: "1.2rem",
-										marginLeft: "3%",
-									}}
-								>
-									Atorvastatin
-								</span>
-							</Typography>
-
-							<Typography>
-								<i
-									class='fas fa-pills'
-									style={{
-										fontSize: "1.6rem",
-										color: "#045de9",
-										marginLeft: "8%",
-										marginTop: "1rem",
-									}}
-								></i>{" "}
-								<span
-									style={{
-										fontSize: "1.2rem",
-										marginLeft: "3%",
-									}}
-								>
-									Azithromycin
-								</span>
-							</Typography>
+)
+}
 						</div>
 						<br></br>
 						<br></br>

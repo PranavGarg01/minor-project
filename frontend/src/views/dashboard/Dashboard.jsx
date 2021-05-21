@@ -11,8 +11,6 @@ import { getMyPrescriptions } from "../../slices/prescription.js";
 import userPic from "../../assets/img/53571.jpg";
 import Divider from "@material-ui/core/Divider";
 import Schedule from "../doctor/Schedule";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -174,7 +172,7 @@ const Dashboard = () => {
 											/>
 										</Grid>
 										<Grid item xs={7}>
-											<div>
+											<div align='center'>
 												<Button
 													variant='contained'
 													color='primary'
@@ -218,6 +216,14 @@ const Dashboard = () => {
 										India
 									</Typography>
 								</Grid>
+								{/* DO SMTHING HERE TO COVER UP SPACE */}
+								{/* <Grid item md={12}>
+									<Hidden smDown>
+										<Paper elevation={3}>
+											hey
+										</Paper>
+									</Hidden>
+								</Grid> */}
 							</Grid>
 						</div>
 					</Grid>

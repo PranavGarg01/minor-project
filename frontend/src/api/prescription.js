@@ -27,7 +27,7 @@ export const getMyPrescriptions = async () => {
 
 export const getDoctorPrescriptions = async () => {
 	try {
-		const res = await API.get("/prescriptions/doctor");
+		const res = await API.get("/prescription/doctor");
 		return res.data;
 	} catch (err) {
 		throw err;

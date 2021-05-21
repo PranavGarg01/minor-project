@@ -558,7 +558,7 @@ const NewPrescription = (props) => {
 										name='medicines'
 										value={medicines}
 										onChange={onChange}
-										placeholder='Medicines'
+										placeholder='Spearate Medicines with a space'
 										variant='outlined'
 									/>
 								</Grid>

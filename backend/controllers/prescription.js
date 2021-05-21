@@ -11,11 +11,24 @@ const DocProfile = require("../models/DocProfile");
 exports.getDoctorPrescriptions = asyncHandler(async (req, res, next) => {
 	const prescription = await Prescription.find({
 		doctor: req.user.id,
-	}).populate("doctor").populate("user");
-	res.status(200).json({
-		success: true,
-		count: prescription.length,
-		data: prescription,
+	}).populate("doctor").populate("user").lean().exec((err,prescription)=>{
+		let press = [];
+		prescription.forEach(async(x,i)=>{
+			const userProfile = await Profile.findOne({user:x.user._id});
+			const docProfile = await DocProfile.findOne({user : x.doctor._id});
+			prescription[i].doctor.profile = docProfile;
+			prescription[i].profile = userProfile;
+			await press.push(prescription[i]);
+			if(i == prescription.length-1) {
+				res.status(200).json({
+					success: true,
+					count: prescription.length,
+					data: prescription,
+				});
+			}
+			
+		});
+		
 	});
 });
 
