@@ -1,23 +1,19 @@
-.profile-box {
-	text-align: center;
-}
-
 .profile-name {
-	font-size: 2rem;
-
+	font-size: 1.5rem;
 	font-weight: 600;
 }
 
 .profile-email {
-	background-color: rgba(0, 172, 112, 0.5);
+	background-color: rgba(0, 172, 112, 0.4);
 	color: rgb(0 152 98);
-	padding: 2px 12px;
+	padding: 3px 12px;
 	border-radius: 19px;
 	/* font-weight: bold; */
 	line-height: 2;
-	font-size: 16px;
+	font-size: 14px;
+	font-weight: bold;
 }
-
+/* 
 .bmi-card {
 	background-color: #045de9;
 	height: 220px;
@@ -25,4 +21,9 @@
 	margin: 30px auto;
 	border-radius: 20px;
 	color: white;
+} */
+
+.label {
+	margin-top: "1.5rem";
+	font-size: "2rem" !important;
 }

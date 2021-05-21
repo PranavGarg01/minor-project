@@ -7,20 +7,23 @@ import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import "./DisplayProfile.css";
 import { PseudoBox, Flex, Text } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import { CREATEPROFILE, DOCTOR_UPDATEPROFILE, UPDATEPROFILE } from "../../../constants/routes";
+import {
+	CREATEPROFILE,
+	DOCTOR_UPDATEPROFILE,
+	UPDATEPROFILE,
+} from "../../../constants/routes";
 // import { CardBody, CardFooter } from "reactstrap";
 import userPic from "../docProfile/53571.jpg";
 
 const useStyles = makeStyles((theme) => ({
 	large: {
-		width: theme.spacing(18),
-		height: theme.spacing(18),
+		width: theme.spacing(13),
+		height: theme.spacing(13),
 		border: "4px solid #a8a8a8",
-		margin: "0 auto",
-		marginBottom: "2rem",
-		marginTop: "3rem",
 		borderBottomColor: "#15db95",
 		borderRightColor: "#15db95",
+		margin: "0 18%",
+		marginTop: "1.6rem",
 	},
 }));
 const DisplayProfile = () => {
@@ -247,67 +250,71 @@ const DisplayProfile = () => {
 
 			{myProfile !== null && (
 				<Grid container style={{ padding: "1rem" }}>
-					<Grid
-						item
-						md={3}
-						style={{
-							// border: "2px solid rgb(214, 212, 212) ",
-							marginTop: "1rem",
-							marginLeft: "1rem",
-							borderRadius: "12px",
-							backgroundColor: "rgba(196, 194, 194, 0.30 )",
-						}}
-						xs={12}
-					>
-						<div>
-							<div class='profile-box'>
-								<Avatar
-									alt='Insert the name initial here'
-									src={userPic}
-									className={classes.large}
-								/>
-								<span class='profile-name'>
-									{" "}
-									{auth.user.name}
-								</span>
-								<br></br>
-								<span class='profile-email'>
-									{auth.user.email}
-								</span>
-								<div>
-									<div class='bmi-card'>
-										<Typography
-											variant='h5'
-											style={{ paddingTop: "1.5rem" }}
+					<Grid item md={3} xs={12}>
+						<div
+							style={{
+								paddingTop: "0.01rem",
+								borderRadius: "12px",
+								backgroundColor: "rgba(196, 194, 194, 0.30 )",
+								width: "90%",
+								marginRight: "auto",
+								marginLeft: "auto",
+								marginBottom: "1rem",
+								paddingBottom: "0.1rem",
+								marginTop: "1rem",
+							}}
+						>
+							<div class="profile-box">
+								<Grid container>
+									<Grid item xs={4} md={12} align="center">
+										<Avatar
+											alt="Insert the name initial here"
+											src="https://m.cricbuzz.com/a/img/v1/192x192/i1/c170661/virat-kohli.jpg"
+											className={classes.large}
+										/>
+									</Grid>
+									<Grid item xs={8} md={12}>
+										<div
+											style={{
+												marginTop: "2rem",
+												width: "auto",
+												textAlign: "center",
+											}}
 										>
-											Your BMI is
-										</Typography>
-										<Typography
-											variant='h1'
-											style={{ marginTop: "0.5rem" }}
-										>
-											21.6
-										</Typography>
-									</div>
-								</div>
-								<Link
-										style={{
-											textDecoration: "none",
-											color: "white",
-										}}
-										to={DOCTOR_UPDATEPROFILE}
-									><Button
-									variant='contained'
-									color='primary'
-									style={{
-										width: "70%",
-										marginBottom: "3rem",
-									}}
-								>
-									
-										<span>Update Profile</span>
-									
-								</Button></Link>
+											<span class="profile-name">
+												{" "}
+												{auth.user.name}
+											</span>
+											<br></br>
+											<span class="profile-email">
+												{auth.user.email}
+											</span>
+										</div>
+										<div style={{ textAlign: "center" }}>
+											<Link
+												style={{
+													textDecoration: "none",
+													color: "white",
+												}}
+												to={DOCTOR_UPDATEPROFILE}
+											>
+												<Button
+													variant="contained"
+													size="small"
+													color="primary"
+													style={{
+														width: "7.6rem",
+														marginBottom: "2rem",
+														marginTop: "0.4rem",
+														fontSize: "0.65rem",
+													}}
+												>
+													<span>Update Profile</span>
+												</Button>
+											</Link>
+										</div>
+									</Grid>
+								</Grid>
 							</div>
 						</div>
 					</Grid>
@@ -317,82 +324,117 @@ const DisplayProfile = () => {
 								style={{
 									color: "gray",
 									marginLeft: "2rem",
-									marginTop: "1rem",
+									marginTop: "3rem",
+									fontSize: "1.7rem",
 								}}
-								variant='h4'
+								variant="h5"
 							>
 								MY PROFILE
 							</Typography>
 							<hr
 								style={{
 									marginLeft: "2rem",
-									width: "94%",
+									width: "80%",
 								}}
 							></hr>
 						</div>
 						<Grid container>
-							<Grid item xs={12} md={6}>
+							<Grid item xs={12}>
 								<div style={{ marginLeft: "2rem" }}>
 									<Typography
-										style={{ marginTop: "3rem" }}
-										color='textSecondary'
-										variant='h5'
+										className="label"
+										style={{
+											marginTop: "2rem",
+											fontSize: "1.1rem",
+										}}
+										color="textSecondary"
 									>
 										Gender:
 										<span
+											class="text"
 											style={{
-												fontSize: "2.5rem",
-												marginLeft: "6rem",
+												fontSize: "1.4rem",
 												color: "#2F4F4F",
+												float: "right",
+												marginRight: "11%",
 											}}
 										>
 											{myProfile.gender}
 										</span>
 									</Typography>
+									<hr
+										style={{
+											marginLeft: "0rem",
+											width: "89%",
+										}}
+									></hr>
 									<Typography
-										style={{ marginTop: "2.5rem" }}
-										color='textSecondary'
-										variant='h5'
+										className="label"
+										color="textSecondary"
+										style={{
+											marginTop: "0.5rem",
+											fontSize: "1.1rem",
+										}}
 									>
 										Specialization:
 										<span
 											style={{
-												fontSize: "2.5rem",
-												marginLeft: "2.5rem",
+												fontSize: "1.3rem",
 												color: "#2F4F4F",
+												float: "right",
+												marginRight: "11%",
 											}}
 										>
 											{myProfile.specialization}
 										</span>
 									</Typography>
+									<hr
+										style={{
+											marginLeft: "0rem",
+											width: "89%",
+										}}
+									></hr>
 									<Typography
-										style={{ marginTop: "2.5rem" }}
-										color='textSecondary'
-										variant='h5'
+										className="label"
+										color="textSecondary"
+										style={{
+											marginTop: "0.5rem",
+											fontSize: "1.1rem",
+										}}
 									>
-										License No.:
+										License No.:{" "}
 										<span
 											style={{
-												fontSize: "2.5rem",
-												marginLeft: "1rem",
+												fontSize: "1.4rem",
 												color: "#2F4F4F",
+												float: "right",
+												marginRight: "11%",
 											}}
 										>
 											{myProfile.licenseNo}
 										</span>
 									</Typography>
-
+									<hr
+										style={{
+											marginLeft: "0rem",
+											width: "89%",
+										}}
+									></hr>
 									<Typography
-										style={{ marginTop: "2.5rem" }}
-										color='textSecondary'
-										variant='h5'
+										className="label"
+										color="textSecondary"
+										style={{
+											marginTop: "0.5rem",
+											fontSize: "1.1rem",
+										}}
 									>
 										Phone Number:
 										<span
 											style={{
-												fontSize: "2rem",
-												marginLeft: "1em",
+												fontSize: "1.1rem",
 												color: "#2F4F4F",
+												float: "right",
+												marginRight: "11%",
 											}}
 										>
 											{myProfile.phoneNumber}
@@ -407,5 +449,4 @@ const DisplayProfile = () => {
 		</div>
 	);
 };
-
 export default DisplayProfile;
