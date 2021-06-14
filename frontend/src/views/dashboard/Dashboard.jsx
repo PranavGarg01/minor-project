@@ -3,7 +3,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./Dashboard.css";
 import { Redirect, useHistory } from "react-router";
 import Loading from "../../components/layouts/Loading";
-import { DOCTOR_DASHBOARD } from "../../constants/routes";
+import { DOCTOR_DASHBOARD, GENERATE_QR, MYPROFILE } from "../../constants/routes";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Avatar, Button, Grid, Typography, Paper } from "@material-ui/core";
 import PrescriptionCard from "../../components/layouts/Dashboard/PrescriptionCard";
@@ -172,18 +172,34 @@ const Dashboard = () => {
 											/>
 										</Grid>
 										<Grid item xs={7}>
-											<div align='center'>
+										<div>
 												<Button
 													variant='contained'
 													color='primary'
 													size='small'
+													href={MYPROFILE}
 													style={{
-														marginLeft: "2rem",
-														marginTop: "0.8rem",
-														width: "7.5rem",
+														marginLeft: "1rem",
+														marginTop: "0.5rem",
+														width: "10rem",
 													}}
 												>
 													My Profile
+												</Button>
+											</div>
+											<div>
+												<Button
+													variant='contained'
+													color='primary'
+													size='small'
+													href={GENERATE_QR}
+													style={{
+														marginLeft: "1rem",
+														marginTop: "0.5rem",
+														width: "10rem",
+													}}
+												>
+													Generate QR
 												</Button>
 											</div>
 										</Grid>

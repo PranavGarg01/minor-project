@@ -1,4 +1,4 @@
-import { Button, Paper, Avatar, Grid, Typography } from "@material-ui/core";
+import { Button, Paper, Avatar, Grid, Typography, Link } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
@@ -12,6 +12,7 @@ import clsx from "clsx";
 import Divider from "@material-ui/core/Divider";
 import { getMyDocProfile } from "../../slices/profile";
 import { getDoctorPrescriptions } from "../../slices/prescription";
+import { DOCTOR_PROFILE, NEW_PRESCRIPTION } from "../../constants/routes";
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -150,13 +151,29 @@ const Dashboard = () => {
 													variant='contained'
 													color='primary'
 													size='small'
+													href={DOCTOR_PROFILE}
 													style={{
-														marginLeft: "2rem",
-														marginTop: "0.8rem",
-														width: "7.5rem",
+														marginLeft: "1rem",
+														marginTop: "0.5rem",
+														width: "10rem",
 													}}
 												>
 													My Profile
+												</Button>
+											</div>
+											<div>
+												<Button
+													variant='contained'
+													color='primary'
+													size='small'
+													href={NEW_PRESCRIPTION}
+													style={{
+														marginLeft: "1rem",
+														marginTop: "0.5rem",
+														width: "10rem",
+													}}
+												>
+													New Prescription
 												</Button>
 											</div>
 										</Grid>

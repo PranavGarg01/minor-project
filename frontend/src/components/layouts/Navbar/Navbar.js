@@ -6,7 +6,7 @@ import { Button } from "./Button";
 import "./Navbar.css";
 import ReorderIcon from "@material-ui/icons/Reorder";
 import { logout } from "../../../slices/auth";
-
+// import HealthAndSafetySharpIcon from '@material-ui/icons/HealthAndSafetySharp';
 const Navbar = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -22,7 +22,8 @@ const Navbar = () => {
 	return (
 		<nav className='NavbarItems'>
 			<h1 className='navbar-logo' onClick={() => history.push("/")}>
-				React<i className='fab fa-react'></i>
+				<span style={{color : "#002F87"}}>Health</span> <span style={{color : "white"}}>X</span> 
+				{/* <i class="fas fa-prescription" style={{color : "#ef3038"}}></i> */}
 			</h1>
 			<div className='menu-icon' onClick={handleClick}>
 				<i className={toggle ? "fas fa-times" : "fas fa-bars"}></i>
