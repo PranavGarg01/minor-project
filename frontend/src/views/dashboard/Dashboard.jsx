@@ -3,7 +3,11 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./Dashboard.css";
 import { Redirect, useHistory } from "react-router";
 import Loading from "../../components/layouts/Loading";
-import { DOCTOR_DASHBOARD, GENERATE_QR, MYPROFILE } from "../../constants/routes";
+import {
+	DOCTOR_DASHBOARD,
+	GENERATE_QR,
+	MYPROFILE,
+} from "../../constants/routes";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Avatar, Button, Grid, Typography, Paper } from "@material-ui/core";
 import PrescriptionCard from "../../components/layouts/Dashboard/PrescriptionCard";
@@ -166,22 +170,22 @@ const Dashboard = () => {
 									>
 										<Grid item xs={5}>
 											<Avatar
-												alt='Insert the name initial here'
+												alt="Insert the name initial here"
 												src={userPic}
 												className={classes.large}
 											/>
 										</Grid>
 										<Grid item xs={7}>
-										<div>
+											<div>
 												<Button
-													variant='contained'
-													color='primary'
-													size='small'
+													variant="contained"
+													color="primary"
+													size="small"
 													href={MYPROFILE}
 													style={{
-														marginLeft: "1rem",
+														marginLeft: "3rem",
 														marginTop: "0.5rem",
-														width: "10rem",
+														width: "8rem",
 													}}
 												>
 													My Profile
@@ -189,14 +193,14 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<Button
-													variant='contained'
-													color='primary'
-													size='small'
+													variant="contained"
+													color="primary"
+													size="small"
 													href={GENERATE_QR}
 													style={{
-														marginLeft: "1rem",
+														marginLeft: "3rem",
 														marginTop: "0.5rem",
-														width: "10rem",
+														width: "8rem",
 													}}
 												>
 													Generate QR
@@ -211,22 +215,22 @@ const Dashboard = () => {
 									style={{ margin: "0 auto", width: "88%" }}
 								>
 									<Typography
-										variant='h4'
+										variant="h4"
 										gutterBottom
 										style={{}}
 									>
 										<b>{auth.user.name}</b>
 									</Typography>
 									<Typography
-										variant='h7'
-										color='textSecondary'
+										variant="h7"
+										color="textSecondary"
 										style={{}}
 									>
 										<b>+91-8000200030</b>
 									</Typography>
 									<Typography
-										variant='h6'
-										color='textSecondary'
+										variant="h6"
+										color="textSecondary"
 										style={{}}
 									>
 										India
@@ -245,8 +249,8 @@ const Dashboard = () => {
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<Typography
-							variant='h6'
-							color='primary'
+							variant="h6"
+							color="primary"
 							style={{
 								marginLeft: "2rem",
 								marginTop: "1.2rem",
@@ -276,8 +280,8 @@ const Dashboard = () => {
 							</Grid>
 						</div>
 						<Typography
-							variant='h6'
-							color='primary'
+							variant="h6"
+							color="primary"
 							style={{
 								marginLeft: "2rem",
 								marginTop: "1.2rem",
@@ -300,7 +304,7 @@ const Dashboard = () => {
 									>
 										<Grid container>
 											<Grid item xs={12}>
-												<Typography variant='subtitle1'>
+												<Typography variant="subtitle1">
 													{`${
 														extractDate(rx.date)[0]
 													} ${
@@ -399,16 +403,16 @@ const Dashboard = () => {
 												item
 												container
 												xs={12}
-												justify='flex-end'
+												justify="flex-end"
 											>
 												<Grid
 													item
 													xs={3}
 													md={2}
-													align='end'
+													align="end"
 												>
 													<Button
-														variant='outlined'
+														variant="outlined"
 														className={
 															classes.listBtn
 														}
@@ -427,10 +431,10 @@ const Dashboard = () => {
 													sm={2}
 													md={2}
 													lg={1}
-													align='end'
+													align="end"
 												>
 													<Button
-														variant='outlined'
+														variant="outlined"
 														onClick={(e) =>
 															handleOpen2(
 																e,

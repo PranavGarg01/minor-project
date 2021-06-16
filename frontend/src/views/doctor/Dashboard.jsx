@@ -1,4 +1,11 @@
-import { Button, Paper, Avatar, Grid, Typography, Link } from "@material-ui/core";
+import {
+	Button,
+	Paper,
+	Avatar,
+	Grid,
+	Typography,
+	Link,
+} from "@material-ui/core";
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
@@ -140,7 +147,7 @@ const Dashboard = () => {
 									>
 										<Grid item xs={5}>
 											<Avatar
-												alt='Insert the name initial here'
+												alt="Insert the name initial here"
 												src={userPic}
 												className={classes.large}
 											/>
@@ -148,14 +155,14 @@ const Dashboard = () => {
 										<Grid item xs={7}>
 											<div>
 												<Button
-													variant='contained'
-													color='primary'
-													size='small'
+													variant="contained"
+													color="primary"
+													size="small"
 													href={DOCTOR_PROFILE}
 													style={{
-														marginLeft: "1rem",
+														marginLeft: "3rem",
 														marginTop: "0.5rem",
-														width: "10rem",
+														width: "8rem",
 													}}
 												>
 													My Profile
@@ -163,12 +170,12 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<Button
-													variant='contained'
-													color='primary'
-													size='small'
+													variant="contained"
+													color="primary"
+													size="small"
 													href={NEW_PRESCRIPTION}
 													style={{
-														marginLeft: "1rem",
+														marginLeft: "2rem",
 														marginTop: "0.5rem",
 														width: "10rem",
 													}}
@@ -196,8 +203,8 @@ const Dashboard = () => {
 										<b>Dr. {auth.user.name}</b>
 									</Typography>
 									<Typography
-										variant='h7'
-										color='textSecondary'
+										variant="h7"
+										color="textSecondary"
 										style={{}}
 									>
 										<b>Heart specialist</b>
@@ -215,8 +222,8 @@ const Dashboard = () => {
 					</Grid>
 					<Grid item xs={12} md={8}>
 						<Typography
-							variant='h6'
-							color='primary'
+							variant="h6"
+							color="primary"
 							style={{
 								marginLeft: "2rem",
 								marginTop: "1.2rem",
@@ -246,8 +253,8 @@ const Dashboard = () => {
 							</Grid>
 						</div>
 						<Typography
-							variant='h6'
-							color='primary'
+							variant="h6"
+							color="primary"
 							style={{
 								marginLeft: "2rem",
 								marginTop: "1.2rem",
@@ -271,7 +278,7 @@ const Dashboard = () => {
 										<Grid container>
 											<Grid item xs={12}>
 												<Typography
-													variant='subtitle1'
+													variant="subtitle1"
 													className={
 														classes.secondaryHeading
 													}

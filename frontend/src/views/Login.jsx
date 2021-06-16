@@ -45,13 +45,15 @@ const useStyles = makeStyles((theme) => ({
 		height: "100%",
 		padding: "2rem",
 		borderRadius: "10px",
+		marginTop: "8rem",
+		borderTop: "1px solid lightgray",
 	},
 	avatar: {
 		marginBottom: theme.spacing(3),
 		backgroundColor: theme.palette.secondary.main,
 		width: theme.spacing(10),
 		height: theme.spacing(10),
-		marginTop: theme.spacing(-9),
+		marginTop: theme.spacing(-15),
 	},
 	form: {
 		width: "100%", // Fix IE 11 issue.
@@ -93,11 +95,15 @@ const Login = (props) => {
 		}
 	}, [isAuthenticated]);
 	return (
-		<Container component='main' maxWidth='xs'>
+		<Container component="main" maxWidth="xs">
 			<CssBaseline />
-			<Paper elevation={3} className={classes.paper}>
+			<Paper
+				elevation={7}
+				className={classes.paper}
+				style={{ paddingTop: "5rem" }}
+			>
 				<Avatar className={classes.avatar}></Avatar>
-				<Typography component='h1' variant='h4'>
+				<Typography component="h1" variant="h4">
 					Login
 				</Typography>
 				<form
@@ -108,13 +114,13 @@ const Login = (props) => {
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								variant='outlined'
+								variant="outlined"
 								required
 								fullWidth
-								id='email'
-								label='Email Address'
-								name='email'
-								autoComplete='email'
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
 								value={email}
 								onChange={onChange}
 								className={classes.textField}
@@ -122,31 +128,31 @@ const Login = (props) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant='outlined'
+								variant="outlined"
 								required
 								fullWidth
-								name='password'
-								label='Password'
-								type='password'
-								id='password'
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
 								value={password}
 								onChange={onChange}
-								autoComplete='current-password'
+								autoComplete="current-password"
 							/>
 						</Grid>
 					</Grid>
 					<Button
-						type='submit'
+						type="submit"
 						fullWidth
-						variant='contained'
-						color='primary'
+						variant="contained"
+						color="primary"
 						className={classes.submit}
 					>
 						Login
 					</Button>
-					<Grid container justify='flex-end'>
+					<Grid container justify="flex-end">
 						<Grid item>
-							<Link href={REGISTER} variant='body2'>
+							<Link href={REGISTER} variant="body2">
 								Don't have an account ? Sign Up
 							</Link>
 						</Grid>

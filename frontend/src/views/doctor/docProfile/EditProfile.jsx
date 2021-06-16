@@ -40,14 +40,15 @@ const EditProfile = () => {
 		dispatch(getMyDocProfile());
 	}, []);
 	useEffect(() => {
-		if(myProfile !==null) setData({
-			gender: myProfile.gender,
-			phoneNumber: myProfile.phoneNumber,
-			specialization: myProfile.specialization,
-			licenseNo: myProfile.licenseNo,
-		})
-	}, [myProfile])
-	
+		if (myProfile !== null)
+			setData({
+				gender: myProfile.gender,
+				phoneNumber: myProfile.phoneNumber,
+				specialization: myProfile.specialization,
+				licenseNo: myProfile.licenseNo,
+			});
+	}, [myProfile]);
+
 	const { gender, specialization, phoneNumber, licenseNo } = data;
 	const onChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
@@ -101,19 +102,12 @@ const EditProfile = () => {
 		<>
 			{loading && <Loader />}
 			{myProfile !== null && (
-				<Grid container justify='center' alignItems='center'>
-					<Grid
-						item
-						container
-						md={6}
-						sm={12}
-						style={{ margin: "2rem auto" }}
-					>
-
+				<Grid container justify="center" alignItems="center">
+					<Grid item container md={6} sm={12}>
 						<Paper
 							elevation={3}
 							style={{
-								padding: "5rem",
+								padding: "3rem",
 								width: "100%",
 								minWidth: "80%",
 								backgroundColor: "#CFEBFD",
@@ -123,17 +117,18 @@ const EditProfile = () => {
 						>
 							<Typography
 								style={{
-									fontSize: "3.5rem",
+									fontSize: "3rem",
 									lineHeight: "none",
 									textAlign: "center",
-									marginBottom: "2rem",
+									marginBottom: "3.5rem",
+									marginTop: "1rem",
 								}}
-								color='primary'
+								color="primary"
 							>
 								UPDATE PROFILE
 							</Typography>
 
-							<form onSubmit={onSubmit} className='form'>
+							<form onSubmit={onSubmit} className="form">
 								<Grid item xs={12}>
 									<FormControl
 										style={{
@@ -152,20 +147,20 @@ const EditProfile = () => {
 										</InputLabel>
 										<Select
 											fullWidth
-											name='gender'
+											name="gender"
 											open={open}
 											onClose={handleClose}
 											onOpen={handleOpen}
 											value={gender}
 											onChange={onChange}
 										>
-											<MenuItem value='male'>
+											<MenuItem value="male">
 												Male
 											</MenuItem>
-											<MenuItem value='female'>
+											<MenuItem value="female">
 												Female
 											</MenuItem>
-											<MenuItem value='others'>
+											<MenuItem value="others">
 												Others
 											</MenuItem>
 										</Select>
@@ -173,8 +168,8 @@ const EditProfile = () => {
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
-										type='text'
-										size='small'
+										type="text"
+										size="small"
 										style={{ margin: "11px auto" }}
 										fullWidth
 										label={
@@ -188,20 +183,20 @@ const EditProfile = () => {
 												License No.
 											</span>
 										}
-										name='licenseNo'
+										name="licenseNo"
 										value={licenseNo}
 										onChange={onChange}
-										placeholder='License No.'
-										variant='outlined'
+										placeholder="License No."
+										variant="outlined"
 									/>
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
-										type='text'
-										size='small'
+										type="text"
+										size="small"
 										style={{ margin: "11px auto" }}
 										fullWidth
-										name='specialization'
+										name="specialization"
 										label={
 											<span
 												style={{
@@ -215,14 +210,14 @@ const EditProfile = () => {
 										}
 										value={specialization}
 										onChange={onChange}
-										placeholder='specialization'
-										variant='outlined'
+										placeholder="specialization"
+										variant="outlined"
 									/>
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
-										type='text'
-										size='small'
+										type="text"
+										size="small"
 										style={{ margin: "11px auto" }}
 										fullWidth
 										label={
@@ -236,22 +231,23 @@ const EditProfile = () => {
 												Contact Number
 											</span>
 										}
-										name='phoneNumber'
+										name="phoneNumber"
 										value={phoneNumber}
 										onChange={onChange}
-										placeholder='eg: +91-1234567893'
-										variant='outlined'
+										placeholder="eg: +91-1234567893"
+										variant="outlined"
 									/>
 								</Grid>
 								<div>
 									<Button
-										type='submit'
+										type="submit"
 										style={{
 											width: "100%",
 											marginTop: "2rem",
+											marginBottom: "7rem",
 										}}
-										variant='contained'
-										color='primary'
+										variant="contained"
+										color="primary"
 									>
 										UPDATE
 									</Button>
