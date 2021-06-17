@@ -2,6 +2,7 @@ import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 import React from "react";
+import { LOGIN, REGISTER } from "../constants/routes";
 import "./hopepage.css";
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
 							variant="contained"
 							color="primary"
 							className="button"
+							href={LOGIN}
 						>
 							LOGIN
 						</Button>
@@ -29,6 +31,7 @@ const Home = () => {
 							variant="outlined"
 							color="primary"
 							className="button"
+							href={REGISTER}
 						>
 							REGISTER
 						</Button>

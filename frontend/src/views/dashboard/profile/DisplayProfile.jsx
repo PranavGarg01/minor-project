@@ -8,7 +8,7 @@ import "./DisplayProfile.css";
 import { PseudoBox, Flex, Text } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { CREATEPROFILE, UPDATEPROFILE } from "../../../constants/routes";
-import sqimg from "../../../assets/img/square-purple-1.png";
+import userPic from "../../../assets/img/53571.jpg";
 
 const useStyles = makeStyles((theme) => ({
 	large: {
@@ -71,7 +71,7 @@ const DisplayProfile = () => {
 									<Grid item xs={4} md={12} align="center">
 										<Avatar
 											alt="Insert the name initial here"
-											src="https://m.cricbuzz.com/a/img/v1/192x192/i1/c170661/virat-kohli.jpg"
+											src={userPic}
 											className={classes.large}
 										/>
 									</Grid>

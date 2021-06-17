@@ -21,7 +21,7 @@ const Navbar = () => {
 
 	return (
 		<nav className='NavbarItems'>
-			<h1 className='navbar-logo' onClick={() => history.push("/")}>
+			<h1 className='navbar-logo' onClick={() => history.push("/dashboard")}>
 				<span style={{color : "#002F87"}}>Health</span> <span style={{color : "white"}}>X</span> 
 				{/* <i class="fas fa-prescription" style={{color : "#ef3038"}}></i> */}
 			</h1>

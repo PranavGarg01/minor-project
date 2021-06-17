@@ -13,7 +13,7 @@ import {
 	UPDATEPROFILE,
 } from "../../../constants/routes";
 // import { CardBody, CardFooter } from "reactstrap";
-import userPic from "../docProfile/53571.jpg";
+import userPic from "../../../assets/img/53571.jpg";
 
 const useStyles = makeStyles((theme) => ({
 	large: {
@@ -269,7 +269,7 @@ const DisplayProfile = () => {
 									<Grid item xs={4} md={12} align="center">
 										<Avatar
 											alt="Insert the name initial here"
-											src="https://m.cricbuzz.com/a/img/v1/192x192/i1/c170661/virat-kohli.jpg"
+											src={userPic}
 											className={classes.large}
 										/>
 									</Grid>
